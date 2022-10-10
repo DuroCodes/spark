@@ -22,7 +22,7 @@ export interface BaseCommand {
 export type TextCommand = Override<
   BaseCommand,
   {
-    type: CommandType.Text | `${CommandType.Text}`,
+    type: CommandType.Text | `${CommandType.Text}`;
     aliases?: string[];
     run: (options: {
       client: Client;
@@ -35,7 +35,7 @@ export type TextCommand = Override<
 export type SlashCommand = Override<
   BaseCommand,
   {
-    type: CommandType.Slash | `${CommandType.Slash}`,
+    type: CommandType.Slash | `${CommandType.Slash}`;
     options?: ApplicationCommandOptionData[];
     guildIds?: string[];
     run: (options: {
@@ -47,7 +47,7 @@ export type SlashCommand = Override<
 >;
 
 export type CommandDefs = {
-  [CommandType.Text ]: TextCommand;
+  [CommandType.Text]: TextCommand;
   [CommandType.Slash]: SlashCommand;
 };
 

@@ -51,8 +51,8 @@ new Logger({
 
 **Highlight Style:**
 
-![](./images/highlight.png)
+![](https://github.com/DuroCodes/spark/blob/main/packages/logger/images/highlight.png)
 
 **Bracket Style:**
 
-![](./images/bracket.png)
+![](https://github.com/DuroCodes/spark/blob/main/packages/logger/images/bracket.png)
