@@ -1,0 +1,42 @@
+{
+  "name": "@spark.ts/handler",
+  "version": "1.0.1",
+  "description": "a discord.js handler in typescript",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.mjs",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "watch": "tsup --watch --dts",
+    "lint": "eslint src/**/*.ts",
+    "format": "eslint src/**/*.ts --fix",
+    "build": "tsup && node scripts/mkjson.mjs dist/cjs dist/esm && tsup --dts-only --outDir dist",
+    "publish": "npm run build && npm publish --access=public"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/durocodes/spark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/durocodes/logger/issues"
+  },
+  "keywords": [],
+  "author": "durocodes",
+  "license": "MIT",
+  "dependencies": {
+    "@spark.ts/logger": "*",
+    "discord.js": "^14.3.0",
+    "globby": "^13.1.2"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "*",
+    "tsup": "^6.2.3",
+    "typescript": "^4.7.4"
+  }
+}
