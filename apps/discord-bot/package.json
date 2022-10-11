@@ -11,12 +11,12 @@
     "start": "tsc && node dist/index.js"
   },
   "dependencies": {
-    "@spark.ts/handler": "*",
+    "@spark.ts/handler": "workspace:*",
     "discord.js": "^14.5.0",
     "ts-dotenv": "^0.8.3"
   },
   "devDependencies": {
-    "eslint-config-custom": "*",
+    "eslint-config-custom": "workspace:*",
     "typescript": "^4.7.4"
   }
 }
