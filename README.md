@@ -6,4 +6,9 @@ This repository is a monorepo, feel free to visit the `packages` directory for t
 
 You can view a very basic example Discord Bot in the `apps` directory.
 
+## TODO: 
+
+- [ ] - Create documentation
+- [ ] - Create CLI tool
+
 Join [my Discord](https://discord.gg/jNwHBwYJZH) for any questions/support
