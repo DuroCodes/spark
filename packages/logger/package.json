@@ -33,14 +33,14 @@
   },
   "homepage": "https://github.com/durocodes/logger#readme",
   "devDependencies": {
-    "@types/node": "^18.7.16",
-    "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "^5.36.2",
-    "eslint": "^8.23.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "tsup": "^6.2.3",
-    "typescript": "^4.8.3"
+    "@types/node": "18.8.4",
+    "@typescript-eslint/eslint-plugin": "5.40.0",
+    "@typescript-eslint/parser": "5.40.0",
+    "eslint": "8.25.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "tsup": "6.2.3",
+    "typescript": "4.8.4"
   },
   "dependencies": {
     "ansi-colors": "^4.1.3"
