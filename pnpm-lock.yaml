@@ -16,7 +16,7 @@ importers:
       discord.js: ^14.5.0
       eslint-config-custom: workspace:*
       ts-dotenv: ^0.8.3
-      typescript: ^4.7.4
+      typescript: 4.8.4
     dependencies:
       '@spark.ts/handler': link:../../packages/handler
       discord.js: 14.6.0
@@ -49,8 +49,8 @@ importers:
       discord.js: ^14.3.0
       eslint-config-custom: workspace:*
       globby: ^13.1.2
-      tsup: ^6.2.3
-      typescript: ^4.7.4
+      tsup: 6.2.3
+      typescript: 4.8.4
     dependencies:
       '@spark.ts/logger': link:../logger
       discord.js: 14.6.0
@@ -62,15 +62,15 @@ importers:
 
   packages/logger:
     specifiers:
-      '@types/node': ^18.7.16
-      '@typescript-eslint/eslint-plugin': ^5.36.2
-      '@typescript-eslint/parser': ^5.36.2
+      '@types/node': 18.8.4
+      '@typescript-eslint/eslint-plugin': 5.40.0
+      '@typescript-eslint/parser': 5.40.0
       ansi-colors: ^4.1.3
-      eslint: ^8.23.0
-      eslint-config-airbnb-base: ^15.0.0
-      eslint-plugin-import: ^2.26.0
-      tsup: ^6.2.3
-      typescript: ^4.8.3
+      eslint: 8.25.0
+      eslint-config-airbnb-base: 15.0.0
+      eslint-plugin-import: 2.26.0
+      tsup: 6.2.3
+      typescript: 4.8.4
     dependencies:
       ansi-colors: 4.1.3
     devDependencies:
