@@ -42,7 +42,7 @@ importers:
       gray-matter: ^4.0.3
       js-cookie: 3.0.1
       next: 12.3.1
-      nextra: 2.0.0-beta.29
+      nextra: 2.0.0-beta.30
       nextra-theme-docs: 2.0.0-beta.28
       postcss: 8.4.17
       react: 17.0.2
@@ -59,7 +59,7 @@ importers:
       copy-to-clipboard: 3.3.2
       js-cookie: 3.0.1
       next: 12.3.1_7zkbjz6d46tpcbbta4lk5n6n6i
-      nextra: 2.0.0-beta.29_dty4et2pnba4zo7o4cegg6bk2e
+      nextra: 2.0.0-beta.30_dty4et2pnba4zo7o4cegg6bk2e
       nextra-theme-docs: 2.0.0-beta.28_dty4et2pnba4zo7o4cegg6bk2e
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -3695,8 +3695,8 @@ packages:
       scroll-into-view-if-needed: 2.2.29
     dev: false
 
-  /nextra/2.0.0-beta.29_dty4et2pnba4zo7o4cegg6bk2e:
-    resolution: {integrity: sha512-UjsaoMNsJRG0fbzqgoLDXgvJwcSJxwPr+ojBBjJsaZ6fu5+cwbCx8wXazA0y5sSxGw75fG6D1I7rS6pflHctuQ==}
+  /nextra/2.0.0-beta.30_dty4et2pnba4zo7o4cegg6bk2e:
+    resolution: {integrity: sha512-X8z9n/GWIsS/5BgAHlB8aTLkInmrV0EKRC6rbVAs0zApjVbA/9Wy/KhasyyQVMuyceCJC2jmI367EaBsQ3RuRg==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
