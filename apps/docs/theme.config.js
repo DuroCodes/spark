@@ -50,10 +50,7 @@ const theme = {
           property="twitter:image"
           content={`https://spark-handler.js.org${frontMatter.ogImage ?? '/og-image.png'}`}
         />
-        <meta
-          property="twitter:image:src"
-          content={`https://spark-handler.js.org${frontMatter.ogImage ?? '/og-image.png'}`}
-        />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta
           property="og:image"
           content={`https://spark-handler.js.org${frontMatter.ogImage ?? '/og-image.png'}`}
