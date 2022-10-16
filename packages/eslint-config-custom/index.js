@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     'import/prefer-default-export': 'off',
     'import/no-unresolved': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'import/extensions': 'off',
     'no-unused-vars': 'off',
     'no-inner-declarations': 'off',
@@ -25,5 +26,9 @@ module.exports = {
     'no-empty-function': 'off',
     'no-new': 'off',
     'consistent-return': 'off',
+    'class-methods-use-this': 'off',
   },
+  globals: {
+    JSX: true,
+  }
 };

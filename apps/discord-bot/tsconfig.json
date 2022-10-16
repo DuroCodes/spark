@@ -12,9 +12,6 @@
     /* Paths */
     "outDir": "./dist",
     "rootDir": "./src",
-    "paths": {
-      "lib/*": ["./lib/*", "./lib"],
-    },
 
     /* The "No" Corner */
     "noImplicitAny": false,

@@ -1,0 +1,12 @@
+{
+  "*": {
+    "//": "Hide all the links from the sidebar or navbar, and disable ToC and Sidebar for these pages.",
+    "hidden": true,
+    "theme": {
+      "toc": false,
+      "sidebar": false,
+      "typesetting": "article"
+    }
+  },
+  "introducing-spark": "Introducing Spark"
+}
