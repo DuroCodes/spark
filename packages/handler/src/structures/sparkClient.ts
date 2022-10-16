@@ -23,6 +23,7 @@ import { importFile } from '../util/importFile';
 import * as Store from '../util/store';
 import { InteractionHandler } from '../events/interactionCreate';
 import { MessageHandler } from '../events/messageCreate';
+import { SparkEvent } from './sparkEvent';
 
 export interface SparkClientDirectories {
   /**
@@ -123,10 +124,10 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
   }
 
   /**
-   * Initializes the commands and registers slash commands if available.
+   * Registers the slash & text commands for the client.
    */
-  public async init(clientId: string) {
-    const commandFiles = await globby(`${this.directories.commands}/**/*.js`);
+  private async initCommands(clientId: string) {
+    const commandFiles = await globby(`${this.directories.commands}/**/*{.js,.ts}`);
 
     for await (const path of commandFiles) {
       const command = await importFile<InputCommand>(path);
@@ -169,6 +170,33 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
     } catch (e) {
       this.logger.error(e);
     }
+  }
+
+  /**
+   * Registers the event listeners for the client.
+   */
+  public async initEvents() {
+    const eventFiles = await globby(`${this.directories.events}/**/*{.js,.ts}`);
+
+    for await (const path of eventFiles) {
+      const event = await importFile<SparkEvent<any>>(path);
+
+      if (event.once) {
+        this.on(event.name, event.run);
+      }
+
+      if (!event.once) {
+        this.on(event.name, event.run);
+      }
+    }
+  }
+
+  /**
+   * Initializes the commands and registers slash commands if available.
+   */
+  private async init(clientId: string) {
+    this.initCommands(clientId);
+    this.initEvents();
   }
 
   /**

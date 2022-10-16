@@ -5,6 +5,7 @@ const client = new SparkClient({
   intents: ['Guilds', 'MessageContent', 'GuildMessages'],
   directories: {
     commands: './dist/commands',
+    events: './dist/events',
   },
   logLevel: 'info',
 });
