@@ -39,8 +39,8 @@ const theme = {
       <>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="theme-color" content="#000" />
+        <meta name="msapplication-TileColor" content="#2E3037" />
+        <meta name="theme-color" content="#2E3037" />
         <meta property="og:type" content="website" />
         <meta name="og:title" content={title} />
         <meta name="og:description" content={frontMatter.description} />
@@ -48,13 +48,15 @@ const theme = {
         <link rel="canonical" href={fullUrl} />
         <meta
           property="twitter:image"
-          content={`https://spark-handler.js.org${frontMatter.ogImage ?? '/og-image.png'
-          }`}
+          content={`https://spark-handler.js.org${frontMatter.ogImage ?? '/og-image.png'}`}
+        />
+        <meta
+          property="twitter:image:src"
+          content={`https://spark-handler.js.org${frontMatter.ogImage ?? '/og-image.png'}`}
         />
         <meta
           property="og:image"
-          content={`https://spark-handler.js.org${frontMatter.ogImage ?? '/og-image.png'
-          }`}
+          content={`https://spark-handler.js.org${frontMatter.ogImage ?? '/og-image.png'}`}
         />
         <meta property="og:locale" content="en_IE" />
         <meta property="og:site_name" content="Spark" />
