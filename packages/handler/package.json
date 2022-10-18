@@ -1,6 +1,6 @@
 {
   "name": "@spark.ts/handler",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "a discord.js handler in typescript",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
@@ -24,13 +24,13 @@
     "url": "https://github.com/durocodes/spark.git"
   },
   "bugs": {
-    "url": "https://github.com/durocodes/logger/issues"
+    "url": "https://github.com/durocodes/spark/issues"
   },
   "keywords": [],
   "author": "durocodes",
   "license": "MIT",
   "dependencies": {
-    "@spark.ts/logger": "workspace:*",
+    "@spark.ts/logger": "latest",
     "discord.js": "^14.3.0",
     "globby": "^13.1.2"
   },

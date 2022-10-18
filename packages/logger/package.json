@@ -29,7 +29,7 @@
   "author": "durocodes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/durocodes/logger/issues"
+    "url": "https://github.com/durocodes/spark/issues"
   },
   "homepage": "https://github.com/durocodes/logger#readme",
   "devDependencies": {

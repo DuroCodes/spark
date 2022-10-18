@@ -1,0 +1,142 @@
+---
+title: Getting Started with Spark
+description: Create your first bot with Spark
+---
+
+import { Tabs, Tab } from '../../../components/Tabs';
+import Callout from '../../../components/Callout';
+
+# Creating a Spark Bot
+
+## Installation
+
+### CLI Installation
+
+Spark now has a CLI which you can use to boostrap your project with all of the things you need to create a Spark bot.
+
+To install the CLI, you need to run the `create-spark` npm package.
+
+<Tabs
+  items={['npm', 'yarn', 'pnpm']}
+  storageKey="selected-package-manager"
+>
+  <Tab>
+    ```
+    npm init spark
+    ```
+  </Tab>
+  <Tab>
+    ```
+    yarn create spark
+    ```
+  </Tab>
+  <Tab>
+    ```
+    pnpm create spark
+    ```
+  </Tab>
+</Tabs>
+
+After you run this, you'll see the list of commands. Run the previous command you did with `init` at the end to initialize a Spark bot.
+
+You will be asked a few questions regarding your bot. If you'd like to skip this, you can pass the `-y` flag to use the default settings.
+
+<Callout>TypeScript is enabled by default.</Callout>
+
+### Manual Installation
+
+To create a new Spark project, install the `@spark.ts/handler` package.
+
+<Tabs
+  items={['npm', 'yarn', 'pnpm']}
+  storageKey="selected-package-manager"
+>
+  <Tab>
+    ```
+    npm i @spark.ts/handler
+    ```
+  </Tab>
+  <Tab>
+    ```
+    yarn add @spark.ts/handler
+    ```
+  </Tab>
+  <Tab>
+    ```
+    pnpm add @spark.ts/handler
+    ```
+  </Tab>
+</Tabs>
+
+## Setup
+
+In your main file, create a `client` variable.
+Inside of the client declaration, you can put the following options:
+
+```ts
+export interface SparkClientOptions {
+  /**
+   * Directories used by the client.
+   * If you're using TypeScript, point this to your `dist` folder directories!
+   */
+  directories?: {
+    events?: string;
+    commands?: string;
+  };
+
+  /**
+   * The log level for the logger
+   */
+  logLevel?: 'Debug'  | 'Info' | 'Warn' | 'Error' | 'Success';
+
+  /**
+   * The prefix used for text commands
+   */
+  prefix?: string;
+}
+```
+
+You can also put options from the Discord.js `ClientOptions`.
+
+### TypeScript & ESM
+
+```ts filename="src/index.ts"
+import { SparkClient } from '@spark.ts/handler';
+
+export const client = new SparkClient({
+  intents: ['Guilds', 'GuildMessages'],
+  // If you're using TS, use your dist folder.
+  directories: {
+    events: './dist/events',
+    commands: './src/commands',
+  },
+});
+```
+
+### CommonJS
+
+```js filename="src/index.js"
+const { SparkClient } = require('@spark.ts/handler');
+
+const client = new SparkClient({
+  intents: ['Guilds', 'GuildMessages'],
+  // Default directories, you can remove this option if you're using these.
+  directories: {
+    events: './src/events',
+    commands: './src/commands',
+  },
+});
+
+exports.default = client;
+```
+
+## Starting Your Bot
+
+With Spark, change:
+
+```diff
+- client.login('<token>');
++ client.start('<token>', '<client id>')
+```
+
+You need to do `client.start()` so Spark can initialize your commands and events.

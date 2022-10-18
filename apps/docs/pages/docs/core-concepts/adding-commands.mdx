@@ -1,0 +1,51 @@
+---
+title: Adding Commands to Your Bot
+description: Add commands to your Spark bot
+---
+
+# Adding Commands
+
+To create a new command for your Spark bot, create a file that ends with `.js` or `.ts` in your commands directory.
+
+Please make sure that if you're using TypeScript, that your commands directory points to your `dist` folder.
+
+This page is written in TypeScript, if you're using CommonJS, please convert the `import` to the `require()` function. You may also have to change the `export default ...` to `exports.default = ...`
+
+## Slash Commands
+
+```ts filename="src/commands/ping.ts"
+import { SparkCommand, CommandType } from '@spark.ts/handler';
+
+export default new SparkCommand({
+  type: CommandType.Slash, // you can also use 'slash'
+  name: 'ping', // if you don't input this, it'll use the file name (ex: foo.ts -> 'foo')
+  description: 'replies with pong', // if you don't input this, it'll use '...'
+  run({ interaction, client }) {
+    client.logger.debug('pong');
+    interaction.reply('pong');
+  },
+});
+```
+
+Inside of the run function, you can use `interaction`, `client`, and `args`. (`args` is the same as `interaction.options`)
+
+## Text Commands
+
+```ts filename="src/commands/ping.ts"
+import { SparkCommand, CommandType } from '@spark.ts/handler';
+
+export default new SparkCommand({
+  type: CommandType.Text, // you can also use 'text'
+  name: 'ping', // if you don't input this, it'll use the file name (ex: foo.ts -> 'foo')
+  description: 'replies with pong', // if you don't input this, it'll use '...'
+  run({ message, client }) {
+    client.logger.debug('pong');
+    message.reply('pong');
+  }
+})
+```
+
+Inside of the run function, you can use `message`, `client`, and `args`. (`args` is an array of strings)
+
+Inside of message commands, you can add the `aliases` property, where you can define an array of aliases for your command.
+

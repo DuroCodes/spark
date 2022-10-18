@@ -16,7 +16,7 @@ const theme = {
   },
   font: false,
   chat: {
-    link: 'https://discord.gg/jNwHBwYJZH',
+    link: 'https://spark-handler.js.org/discord',
   },
   feedback: {
     link: 'Question? Give us feedback →',

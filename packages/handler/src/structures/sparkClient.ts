@@ -3,6 +3,7 @@ import {
   BitFieldResolvable,
   CacheFactory,
   Client,
+  ClientEvents,
   GatewayIntentsString,
   MessageMentionOptions,
   Partials,
@@ -179,14 +180,20 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
     const eventFiles = await globby(`${this.directories.events}/**/*{.js,.ts}`);
 
     for await (const path of eventFiles) {
-      const event = await importFile<SparkEvent<any>>(path);
+      const event = await importFile<SparkEvent<keyof ClientEvents>>(path);
 
-      if (event.once) {
-        this.on(event.name, event.run);
+      const evt: SparkEvent<keyof ClientEvents> = {
+        ...event,
+        name: event.name ?? parse(path).name,
+        once: event.once ?? false,
+      };
+
+      if (evt.once) {
+        this.on(evt.name, evt.run);
       }
 
-      if (!event.once) {
-        this.on(event.name, event.run);
+      if (!evt.once) {
+        this.on(evt.name, evt.run);
       }
     }
   }

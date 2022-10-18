@@ -27,6 +27,7 @@ module.exports = {
     'no-new': 'off',
     'consistent-return': 'off',
     'class-methods-use-this': 'off',
+    'jsx-quotes': ['error', 'prefer-double'],
   },
   globals: {
     JSX: true,

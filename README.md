@@ -8,7 +8,7 @@ You can view a very basic example Discord Bot in the `apps` directory.
 
 ## TODO: 
 
-- [ ] - Create documentation
-- [ ] - Create CLI tool
+- [x] - Create documentation
+- [x] - Create CLI tool
 
 Join [my Discord](https://discord.gg/jNwHBwYJZH) for any questions/support

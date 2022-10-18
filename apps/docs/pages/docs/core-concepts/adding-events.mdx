@@ -1,0 +1,34 @@
+---
+title: Adding Events to Your Bot
+description: Add events to your Spark bot
+---
+
+# Adding Events
+
+To create a new event for your Spark bot, create a file that ends with `.js` or `.ts` in your events directory.
+
+Please make sure that if you're using TypeScript, that your events directory points to your `dist` folder.
+
+This page is written in TypeScript, if you're using CommonJS, please convert the `import` to the `require()` function. You may also have to change the `export default ...` to `exports.default = ...`
+
+## Ready Event
+
+If you'd like to create a ready event for example, you can use the following code.
+
+```ts filename="src/events/ready.ts"
+import { SparkEvent } from '@spark.ts/handler';
+import { Events } from 'discord.js';
+
+export default new SparkEvent({
+  name: Events.ClientReady, // you can also use 'ready'
+  run(client) {
+    client.logger.success(`${client.user.tag} is now online!`);
+  },
+});
+```
+
+Inside of the run function, you should receieve intellisense for the parameters.
+
+For example, if you had an `interactionCreate` event, your first parameter should have the type `Interaction`
+
+If you don't input a name for your event, Spark will use the file's name. For example, if your file was called `interactionCreate`, it would use `'interactionCreate'` for the name property.
