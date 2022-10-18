@@ -1,7 +1,45 @@
 ---
-title: You might not need TypeScript project references
-date: 10/15/2022
+title: Introducing Spark
+date: 10/18/2022
 description:  Welcome to Spark, the next generation Discord.js handler.
 ---
 
-# TODO
+import Callout from '../../components/Callout';
+
+# Introducing Spark
+
+Spark is a next-generation Discord.js handler built with TypeScript in mind.
+
+If you'd like to start using Spark, you can view our [`quickstart`](/docs) for more information on how to setup a bot.
+
+## Why?
+
+### Simplicity
+
+Spark is built to be simple and easy to use for everyone.
+
+It only takes a few lines of code to create your first command, for example, here's a ping command.
+
+```ts filename="src/commands/ping.ts"
+import { SparkCommand, CommandType } from '@spark.ts/handler';
+
+export default new SparkCommand({
+  type: CommandType.Slash,
+  run({ interaction }) {
+    interaction.reply('pong');
+  },
+});
+```
+
+Spark was also designed to be ease for the average Discord.js user to start using.
+This means that you don't have to learn anything new, you can apply your concepts from Discord.js into Spark.
+
+### CLI Tool
+
+With Spark's CLI tool, `create-spark`, you can create a new Spark project in just a few seconds.
+
+All you have to do is answer a few questions, and your Spark project is setup for you!
+
+![](../../public/images/blog/spark-cli.png)
+
+<Callout type="info">If you'd like more information on this project, join our [Discord server](/discord).</Callout>

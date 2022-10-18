@@ -74,6 +74,11 @@ export async function scaffoldProject({
     path.join(projectDir, '.gitignore'),
   );
 
+  fs.renameSync(
+    path.join(projectDir, '.env.example'),
+    path.join(projectDir, '.env'),
+  );
+
   const scaffoldedName = appName === '.' ? 'App' : colors.cyan.bold(appName);
 
   spinner.succeed(`${scaffoldedName} scaffolded successfully!\n`);
