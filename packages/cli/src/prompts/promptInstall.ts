@@ -11,7 +11,7 @@ export async function promptInstall() {
   const { install } = await inquirer.prompt<{ install: boolean; }>({
     name: 'install',
     type: 'confirm',
-    message: `Woudld you like to run '${pkgManager} install'?`,
+    message: `Would you like to run '${pkgManager} install'?`,
     default: true,
   });
 
