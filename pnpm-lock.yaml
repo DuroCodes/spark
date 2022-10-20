@@ -42,7 +42,7 @@ importers:
       gray-matter: ^4.0.3
       js-cookie: 3.0.1
       next: 12.3.1
-      nextra: 2.0.0-beta.30
+      nextra: 2.0.0-beta.32
       nextra-theme-docs: 2.0.0-beta.28
       postcss: 8.4.18
       react: 17.0.2
@@ -58,7 +58,7 @@ importers:
       copy-to-clipboard: 3.3.2
       js-cookie: 3.0.1
       next: 12.3.1_7zkbjz6d46tpcbbta4lk5n6n6i
-      nextra: 2.0.0-beta.30_dty4et2pnba4zo7o4cegg6bk2e
+      nextra: 2.0.0-beta.32_dty4et2pnba4zo7o4cegg6bk2e
       nextra-theme-docs: 2.0.0-beta.28_dty4et2pnba4zo7o4cegg6bk2e
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -105,26 +105,6 @@ importers:
       eslint-config-custom: link:../eslint-config-custom
       typescript: 4.8.4
 
-  packages/cli/templates/javascript:
-    specifiers:
-      '@spark.ts/handler': workspace:^1.0.6
-      discord.js: ^14.6.0
-      dotenv: ^16.0.3
-    dependencies:
-      '@spark.ts/handler': link:../../../handler
-      discord.js: 14.6.0
-      dotenv: 16.0.3
-
-  packages/cli/templates/typescript:
-    specifiers:
-      '@spark.ts/handler': workspace:*
-      discord.js: ^14.6.0
-      ts-dotenv: ^0.8.3
-    dependencies:
-      '@spark.ts/handler': link:../../../handler
-      discord.js: 14.6.0
-      ts-dotenv: 0.8.3
-
   packages/eslint-config-custom:
     specifiers:
       '@typescript-eslint/eslint-plugin': ^5.39.0
@@ -145,7 +125,7 @@ importers:
 
   packages/handler:
     specifiers:
-      '@spark.ts/logger': workspace:*
+      '@spark.ts/logger': latest
       discord.js: ^14.3.0
       eslint-config-custom: workspace:*
       globby: ^13.1.2
@@ -1736,11 +1716,6 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
-
-  /dotenv/16.0.3:
-    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
-    engines: {node: '>=12'}
-    dev: false
 
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -3981,8 +3956,8 @@ packages:
       scroll-into-view-if-needed: 2.2.29
     dev: false
 
-  /nextra/2.0.0-beta.30_dty4et2pnba4zo7o4cegg6bk2e:
-    resolution: {integrity: sha512-X8z9n/GWIsS/5BgAHlB8aTLkInmrV0EKRC6rbVAs0zApjVbA/9Wy/KhasyyQVMuyceCJC2jmI367EaBsQ3RuRg==}
+  /nextra/2.0.0-beta.32_dty4et2pnba4zo7o4cegg6bk2e:
+    resolution: {integrity: sha512-qTuZTNeu4farP+gXZLs8rKIrWRuCAn36IStPNrSdfY/6ZchvMnza+bpPUmCyUSVHrkNEZ/jToDi4WVRQekojTg==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
