@@ -1,11 +1,10 @@
 {
   "name": "@spark.ts/handler",
-  "version": "1.0.7",
+  "version": "1.1.1",
   "description": "a discord.js handler in typescript",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
     "watch": "tsup --watch --dts",
     "lint": "eslint src/**/*.ts",
@@ -17,7 +16,7 @@
     ".": {
       "import": "./dist/esm/index.mjs",
       "require": "./dist/cjs/index.cjs"
-    }
+    } 
   },
   "repository": {
     "type": "git",
@@ -30,7 +29,7 @@
   "author": "durocodes",
   "license": "MIT",
   "dependencies": {
-    "@spark.ts/logger": "latest",
+    "@spark.ts/logger": "workspace:^",
     "discord.js": "^14.3.0",
     "globby": "^13.1.2"
   },
