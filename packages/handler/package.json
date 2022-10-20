@@ -1,6 +1,6 @@
 {
   "name": "@spark.ts/handler",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "a discord.js handler in typescript",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
@@ -9,8 +9,7 @@
     "watch": "tsup --watch --dts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
-    "build": "tsup && node scripts/mkjson.mjs dist/cjs dist/esm && tsup --dts-only --outDir dist",
-    "publish": "npm run build && npm publish --access=public"
+    "build": "tsup && node scripts/mkjson.mjs dist/cjs dist/esm && tsup --dts-only --outDir dist"
   },
   "exports": {
     ".": {
