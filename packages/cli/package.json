@@ -1,6 +1,6 @@
 {
   "name": "create-spark",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "a cli for @spark.ts",
   "main": "./dist/index.js",
   "bin": "./dist/index.js",
@@ -9,8 +9,7 @@
     "watch": "tsup --watch --dts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
-    "build": "tsc",
-    "publish": "npm run build && npm publish --access=public"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
