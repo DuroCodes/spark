@@ -190,10 +190,12 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
       };
 
       if (evt.once) {
+        this.logger.debug(`Loading ${evt.name} as a 'once' event listener.`);
         this.on(evt.name, evt.run);
       }
 
       if (!evt.once) {
+        this.logger.debug(`Loading ${evt.name} event listener.`);
         this.on(evt.name, evt.run);
       }
     }
