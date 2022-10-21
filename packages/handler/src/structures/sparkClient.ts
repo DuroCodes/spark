@@ -13,7 +13,7 @@ import {
   SweeperOptions,
   WebSocketOptions,
 } from 'discord.js';
-import { globby } from 'globby';
+import glob from 'fast-glob';
 import { parse } from 'path';
 import { Logger, LogLevel } from '@spark.ts/logger';
 import {
@@ -128,7 +128,7 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
    * Registers the slash & text commands for the client.
    */
   private async initCommands(clientId: string) {
-    const commandFiles = await globby(`${this.directories.commands}/**/*{.js,.ts}`);
+    const commandFiles = await glob(`${this.directories.commands}/**/*{.js,.ts}`);
 
     for await (const path of commandFiles) {
       const command = await importFile<InputCommand>(path);
@@ -177,7 +177,7 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
    * Registers the event listeners for the client.
    */
   public async initEvents() {
-    const eventFiles = await globby(`${this.directories.events}/**/*{.js,.ts}`);
+    const eventFiles = await glob(`${this.directories.events}/**/*{.js,.ts}`);
 
     for await (const path of eventFiles) {
       const event = await importFile<SparkEvent<keyof ClientEvents>>(path);
@@ -186,6 +186,7 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
         ...event,
         name: event.name ?? parse(path).name,
         once: event.once ?? false,
+        run: event.run ?? (() => null),
       };
 
       if (evt.once) {

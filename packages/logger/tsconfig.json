@@ -1,10 +1,14 @@
 {
+  "exclude": ["dist", "node_modules"],
+  "include": ["src"],
   "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ESNext",
     "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "strict": true,
-    "sourceMap": false,
-    "moduleResolution": "Node",
-    "declaration": true,
+    "sourceMap": true,
 
     /* Paths */
     "outDir": "./dist",
@@ -30,8 +34,7 @@
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "exclude": ["node_modules", "dist"],
-  "include": ["src"]
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true
+  }
 }
