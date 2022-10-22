@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@spark.ts/handler": "latest",
     "discord.js": "14.6.0",

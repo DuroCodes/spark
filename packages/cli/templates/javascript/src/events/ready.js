@@ -1,5 +1,5 @@
-import { SparkEvent } from '@spark.ts/handler';
-import { Events } from 'discord.js';
+const { SparkEvent } = require('@spark.ts/handler');
+const { Events } = require('discord.js');
 
 export default new SparkEvent({
   name: Events.ClientReady,
