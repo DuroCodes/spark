@@ -21,7 +21,7 @@ import {
   InputCommand,
 } from '../types/command';
 import { importFile } from '../util/importFile';
-import * as Store from '../util/store';
+import { Store } from '../util/store';
 import { InteractionHandler } from '../events/interactionCreate';
 import { MessageHandler } from '../events/messageCreate';
 import { SparkEvent } from './sparkEvent';

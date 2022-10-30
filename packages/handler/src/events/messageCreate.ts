@@ -1,6 +1,6 @@
 import { Client, Message } from 'discord.js';
 import { BaseEvent } from './baseEvent';
-import * as Store from '../util/store';
+import { Store } from '../util/store';
 import { TextCommand } from '../types/command';
 
 async function textCommandHandler(

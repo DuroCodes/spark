@@ -6,7 +6,7 @@ import {
   Interaction,
 } from 'discord.js';
 import { SlashCommand } from '../types/command';
-import * as Store from '../util/store';
+import { Store } from '../util/store';
 import { BaseEvent } from './baseEvent';
 
 async function slashCommandHandler(

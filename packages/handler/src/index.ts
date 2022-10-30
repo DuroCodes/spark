@@ -8,3 +8,4 @@ export {
   CommandType,
 } from './types/command';
 export { EventOptions, EventRunner } from './types/event';
+export { Store } from './util/store';
