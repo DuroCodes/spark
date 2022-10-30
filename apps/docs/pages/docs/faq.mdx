@@ -5,4 +5,10 @@ description: Frequently asked questions about Spark.
 
 # Frequently Asked Questions
 
-## TODO
+## How Do I Access Commands
+
+With a normal Discord.js handler, you would be able to access commands with `client.commands` (or something similar). With Spark, this is a little different.
+
+Spark uses the `Store` object to store commands. You can import this via `import { Store } from '@spark.ts/handler'`, or `const { Store } = require('@spark.ts/handler')`.
+
+For example, instead of doing `client.commands`, you would do `Store.applicationCommands` for application (slash) commands.
