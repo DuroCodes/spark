@@ -1,0 +1,47 @@
+---
+title: Introducing Spark
+date: 11/8/2022
+description: Spark now has plugins!
+---
+
+# Spark Plugins
+
+Spark now has plugin support! With plugins, you can create reusable actions with ease, without copy/pasting code between files.
+
+## How to create a plugin
+
+To create a plugin, simply create a function:
+
+```ts filename="src/plugins/ownerOnly.ts"
+// This is an example plugin for a 'owner only' slash command plugin.
+// For a text command plugin, you'd just have to use message instead of interaction.
+
+export function ownerOnly(ownerIds: string[]): SlashCommandPlugin {
+  return {
+    // Description of the plugin, this is mainly for documentation.
+    description: 'Only allows the owner to run the command.',
+
+    // Logic for the plugin.
+    async run({ interaction, controller }) {
+      if (ownerIds.includes(interaction.user.id)) {
+        return controller.next();
+      }
+
+      await interaction.reply({
+        content: `Only these people can run this!\n${mapUsers(ownerIds)}`,
+        ephemeral: true,
+      });
+
+      return controller.stop();
+    },
+  };
+}
+```
+
+## Controller
+
+With plugins, you have the `controller` option in the run function. With the controller, you can specify when to stop or continue with the action.
+
+For example, if you'd like to return an `Err`, or specify that the plugin failed, you'd return `controller.stop()`. This would make the command execution stop.
+
+If you'd like to continue with the command, you have to return `controller.next()`, this means that the controller should continue with whatever action.

@@ -8,5 +8,6 @@
       "typesetting": "article"
     }
   },
-  "introducing-spark": "Introducing Spark"
+  "introducing-spark": "Introducing Spark",
+  "introducing-plugins": "Introducing Spark Plugins"
 }
