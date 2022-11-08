@@ -4,6 +4,8 @@ date: 11/8/2022
 description: Spark now has plugins!
 ---
 
+import Image from 'next/image';
+
 # Spark Plugins
 
 Spark now has plugin support! With plugins, you can create reusable actions with ease, without copy/pasting code between files.
@@ -45,3 +47,9 @@ With plugins, you have the `controller` option in the run function. With the con
 For example, if you'd like to return an `Err`, or specify that the plugin failed, you'd return `controller.stop()`. This would make the command execution stop.
 
 If you'd like to continue with the command, you have to return `controller.next()`, this means that the controller should continue with whatever action.
+
+## Flowchart
+
+Here's a flowchart that shows the execution of commands:
+
+<Image src="/images/blog/plugin-flowchart.png" height={2304 / 3} width={2208 / 3} />
