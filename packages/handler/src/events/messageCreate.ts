@@ -2,6 +2,7 @@ import { Client, Message } from 'discord.js';
 import { BaseEvent } from './baseEvent';
 import { Store } from '../util/store';
 import { TextCommand } from '../types/command';
+import { controller } from '../util/controller';
 
 async function textCommandHandler(
   command: TextCommand,
@@ -9,6 +10,17 @@ async function textCommandHandler(
   args: string[],
 ) {
   try {
+    if (command.plugins) {
+      for await (const plugin of command.plugins) {
+        const { err } = await plugin.run({
+          client: message.client,
+          message,
+          controller,
+        });
+
+        if (err) return;
+      }
+    }
     return await command.run({
       client: message.client,
       message,

@@ -30,7 +30,8 @@
   "dependencies": {
     "@spark.ts/logger": "workspace:^",
     "discord.js": "^14.3.0",
-    "fast-glob": "^3.2.12"
+    "fast-glob": "^3.2.12",
+    "ts-results-es": "^3.5.0"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",

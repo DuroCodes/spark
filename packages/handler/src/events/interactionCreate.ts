@@ -7,6 +7,7 @@ import {
 } from 'discord.js';
 import { SlashCommand } from '../types/command';
 import { Store } from '../util/store';
+import { controller } from '../util/controller';
 import { BaseEvent } from './baseEvent';
 
 async function slashCommandHandler(
@@ -14,6 +15,18 @@ async function slashCommandHandler(
   interaction: ChatInputCommandInteraction,
 ) {
   try {
+    if (command.plugins) {
+      for await (const plugin of command.plugins) {
+        const { err } = await plugin.run({
+          client: interaction.client,
+          interaction,
+          controller,
+        });
+
+        if (err) return;
+      }
+    }
+
     return await command.run({
       client: interaction.client,
       interaction,

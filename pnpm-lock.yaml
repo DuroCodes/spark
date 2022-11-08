@@ -129,12 +129,14 @@ importers:
       discord.js: ^14.3.0
       eslint-config-custom: workspace:*
       fast-glob: ^3.2.12
+      ts-results-es: ^3.5.0
       tsup: 6.2.3
       typescript: 4.8.4
     dependencies:
       '@spark.ts/logger': link:../logger
       discord.js: 14.6.0
       fast-glob: 3.2.12
+      ts-results-es: 3.5.0
     devDependencies:
       eslint-config-custom: link:../eslint-config-custom
       tsup: 6.2.3_typescript@4.8.4
@@ -5190,6 +5192,10 @@ packages:
 
   /ts-mixer/6.0.1:
     resolution: {integrity: sha512-hvE+ZYXuINrx6Ei6D6hz+PTim0Uf++dYbK9FFifLNwQj+RwKquhQpn868yZsCtJYiclZF1u8l6WZxxKi+vv7Rg==}
+    dev: false
+
+  /ts-results-es/3.5.0:
+    resolution: {integrity: sha512-W7Vtg9u7QsutEfDbLEJNDlDrYGK7spxab6Je+K9+tjI/ixCM1ouniQmHJX0mZUok5WsWiCGxQy6lIrI//nBzTg==}
     dev: false
 
   /tsconfig-paths/3.14.1:

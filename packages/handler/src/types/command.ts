@@ -6,6 +6,7 @@ import {
   CommandInteractionOptionResolver,
   Message,
 } from 'discord.js';
+import { SlashCommandPlugin, TextCommandPlugin } from './plugin';
 import { Override } from './util';
 
 export enum CommandType {
@@ -24,6 +25,7 @@ export type TextCommand = Override<
   {
     type: CommandType.Text | `${CommandType.Text}`;
     aliases?: string[];
+    plugins?: TextCommandPlugin[];
     run: (options: {
       client: Client;
       message: Message;
@@ -37,6 +39,7 @@ export type SlashCommand = Override<
   {
     type: CommandType.Slash | `${CommandType.Slash}`;
     options?: ApplicationCommandOptionData[];
+    plugins?: SlashCommandPlugin[];
     guildIds?: string[];
     run: (options: {
       client: Client;
