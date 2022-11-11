@@ -1,5 +1,5 @@
 import React from 'react';
-import { DOCS_FEATURES, HOME_FEATURES } from '../content/features';
+import { DOCS_FEATURES, HOME_FEATURES } from '~/content/features';
 import Feature from './Feature';
 
 export function DetailedFeaturesGrid({

@@ -4,7 +4,7 @@ import {
   CodeIcon,
   MapIcon,
 } from '@heroicons/react/outline';
-import { IconType } from '../components/Icons';
+import { IconType } from '~/components/Icons';
 
 export type Feature = {
   name: string;

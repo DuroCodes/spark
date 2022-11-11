@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useConfig } from 'nextra-theme-docs';
-import { Footer } from './components/Footer';
-import SparkLogo from './components/logos/SparkLogo';
+import { Footer } from './src/components/Footer';
+import SparkLogo from './src/components/logos/SparkLogo';
 
 const theme = {
   project: {

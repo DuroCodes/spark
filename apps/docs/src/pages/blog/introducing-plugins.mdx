@@ -18,6 +18,8 @@ To create a plugin, simply create a function:
 // This is an example plugin for a 'owner only' slash command plugin.
 // For a text command plugin, you'd just have to use message instead of interaction.
 
+import { SlashCommandPlugin } from '@spark.ts/handler';
+
 export function ownerOnly(ownerIds: string[]): SlashCommandPlugin {
   return {
     // Description of the plugin, this is mainly for documentation.
@@ -38,6 +40,27 @@ export function ownerOnly(ownerIds: string[]): SlashCommandPlugin {
     },
   };
 }
+```
+
+## Adding plugins to commands
+
+To add a plugin to a command, you can add the function inside of the `plugins` option in the `SparkCommand`.
+
+For example, if you'd like to add the `ownerOnly` plugin to the command, you'd use:
+
+```ts filename="src/commands/ownerOnly.ts"
+import { SparkCommand } from '@spark.ts/handler';
+
+export default new SparkCommand({
+  type: CommandType.Slash,
+  // Example id -> '283312847478325251' (Duro#5232)
+  plugins: [ownerOnly(['283312847478325251'])],
+  run({ interaction }) {
+    // This only executes if the ownerOnly() plugin passed.
+    // You can use this plugin to check for an owner, or just as a template.
+    interaction.reply('You are allowed to use this command!');
+  },
+});
 ```
 
 ## Controller

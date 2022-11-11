@@ -1,5 +1,5 @@
-import '../styles.css';
-import '../custom.css';
+import '~/styles/styles.css';
+import '~/styles/custom.css';
 
 import { SSRProvider } from '@react-aria/ssr';
 

@@ -3,7 +3,7 @@ import copy from 'copy-to-clipboard';
 import Head from 'next/head';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
-import { HomeFeatures } from '../Features';
+import { HomeFeatures } from '~/components/Features';
 
 export default function Home() {
   const onClick = () => {

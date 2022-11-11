@@ -1,5 +1,5 @@
 import { SparkClient } from '@spark.ts/handler';
-import { env } from './util/env.js';
+import { env } from '~/util/env.js';
 
 const client = new SparkClient({
   intents: ['Guilds', 'MessageContent', 'GuildMessages'],
