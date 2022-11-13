@@ -104,7 +104,7 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
   public override readonly directories: Readonly<SparkClientDirectories>;
 
   /**
-   * The prefix used for text commands.
+   * The prefix used for text commands. Defaults to '!'
    * @readonly
    */
   public override readonly prefix?: string;
