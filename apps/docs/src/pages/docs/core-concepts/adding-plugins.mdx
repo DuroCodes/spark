@@ -1,0 +1,74 @@
+---
+title: Adding Plugins to Your Bot
+description: Add plugins to your Spark bot
+---
+
+import Callout from '~/components/Callout';
+
+# Adding Plugins
+
+Plugins are a way to reuse code between multiple different commands, without writing the same code twice.
+
+It's recommended that you have a directory for plugins, and you can use that directory to import it to your commands.
+
+For example, you could make an `Owner Only` plugin like this:
+
+```ts filename="src/plugins/ownerOnly.ts"
+// This is an example plugin for a 'owner only' slash command plugin.
+// For a text command plugin, you'd just have to use message instead of interaction.
+
+import { SlashCommandPlugin } from '@spark.ts/handler';
+
+export function ownerOnly(ownerIds: string[]): SlashCommandPlugin {
+  return {
+    // Description of the plugin, this is mainly for documentation.
+    description: 'Only allows the owner to run the command.',
+
+    // Logic for the plugin.
+    async run({ interaction, controller }) {
+      if (ownerIds.includes(interaction.user.id)) {
+        return controller.next();
+      }
+
+      await interaction.reply({
+        content: `Only these people can run this!\n${mapUsers(ownerIds)}`,
+        ephemeral: true,
+      });
+
+      return controller.stop();
+    },
+  };
+}
+```
+
+<Callout>
+  This plugin only works for a slash command. Notice the return signature, `SlashCommandPlugin`.
+</Callout>
+
+## Command Integration
+
+To integrate this plugin to one of your commands, first check that your command and plugin are of the same type. (You cannot use text plugins with a slash command)
+
+To add a plugin to your command, just import the function and then add it to the `plugins` option:
+
+```ts filename="src/commands/ownerOnly.ts" {6}
+import { SparkCommand } from '@spark.ts/handler';
+// This import is using a path alias, `~` for the `src` directory.
+import { ownerOnly } from '~/plugins/ownerOnly.js';
+
+export default new SparkCommand({
+  plugins: [ownerOnly('<your user id would go here>')],
+  run({ interaction }) {
+    // This would only be executed if the plugin passed.
+    interaction.reply('You are permitted to use this command!');
+  },
+});
+```
+
+## Controller
+
+The controller is what controls your flow of your code. If you do `controller.stop()` in your command, it'll stop the execution of your command.
+
+Please make sure to return this upon an error in your plugin. For example, if the user is not permitted to use the command, you return `controller.stop()` in your plugin.
+
+If you have a success in your plugin, return `controller.next()`. This will continue on with the command, and other plugins.
