@@ -21,6 +21,7 @@ async function slashCommandHandler(
           client: interaction.client,
           interaction,
           controller,
+          command,
         });
 
         if (err) return;

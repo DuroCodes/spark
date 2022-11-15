@@ -16,6 +16,7 @@ async function textCommandHandler(
           client: message.client,
           message,
           controller,
+          command,
         });
 
         if (err) return;
