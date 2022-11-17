@@ -35,10 +35,5 @@
     "exactOptionalPropertyTypes": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "~/*": [
-        "./src/*"
-      ]
-    },
   }
 }

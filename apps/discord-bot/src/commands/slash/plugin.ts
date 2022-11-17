@@ -1,5 +1,5 @@
 import { SparkCommand, CommandType } from '@spark.ts/handler';
-import { ownerOnlySlash } from '~/plugins/ownerOnly';
+import { ownerOnlySlash } from '../../plugins/ownerOnly.js';
 
 export default new SparkCommand({
   type: CommandType.Slash,

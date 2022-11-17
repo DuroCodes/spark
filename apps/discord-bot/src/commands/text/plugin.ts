@@ -1,5 +1,5 @@
 import { SparkCommand, CommandType } from '@spark.ts/handler';
-import { ownerOnlyText } from '~/plugins/ownerOnly';
+import { ownerOnlyText } from '../../plugins/ownerOnly.js';
 
 export default new SparkCommand({
   type: CommandType.Text,
