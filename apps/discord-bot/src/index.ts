@@ -10,4 +10,4 @@ const client = new SparkClient({
   logLevel: 'info',
 });
 
-client.start(env.DISCORD_TOKEN);
+client.start(env.DISCORD_TOKEN, env.CLIENT_ID);

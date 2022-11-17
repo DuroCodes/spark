@@ -1,6 +1,6 @@
 {
   "name": "@spark.ts/handler",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "a discord.js handler in typescript",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
