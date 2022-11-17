@@ -79,7 +79,7 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
   /**
    * The log level used by the logger.
    */
-  public override logLevel: LogLevel = 'debug';
+  private logLevel: LogLevel = 'debug';
 
   /**
    * The logger to be used by the handler.
@@ -226,7 +226,6 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
 declare module 'discord.js' {
   interface Client {
     logger: Logger;
-    logLevel: LogLevel;
     readonly directories: Readonly<SparkClientDirectories>;
     readonly prefix?: string;
   }

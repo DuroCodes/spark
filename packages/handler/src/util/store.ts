@@ -4,9 +4,9 @@ import { SlashCommand, TextCommand } from '../types/command';
 export namespace Store {
   /**
    * The interaction commands.
-   * Stores application commands, including slash and application commands (WIP).
-   * TODO: Add support for other command types. (Such as user commands)
+   * Stores application commands, including slash and application commands.
   */
+  // TODO: Add support for other command types. (Such as user commands)
   export const applicationCommands = {
     [ApplicationCommandType.ChatInput]: new Collection<string, SlashCommand>(),
   };
