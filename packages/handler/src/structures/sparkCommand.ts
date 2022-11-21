@@ -1,6 +1,35 @@
 import { BaseCommand, CommandType, InputCommand } from '../types/command';
 import { SlashCommandPlugin, TextCommandPlugin } from '../types/plugin';
 
+/**
+ * The event class. Use this class to create new commands in your bot.
+ *
+ * @example
+ * ```ts
+ * // TypeScript
+ * import { SparkCommand } from '@spark.ts/handler';
+ *
+ * export default new SparkCommand({
+ *   name: 'ping',
+ *   run({ interaction }) {
+ *     interaction.reply('Pong!');
+ *   },
+ * });
+ * ```
+ *
+ * @example
+ * ```js
+ * // JavaScript (CJS)
+ * const { SparkCommand } = require('@spark.ts/handler');
+ *
+ * exports.default = new SparkCommand({
+ *   name: 'ping',
+ *   run({ interaction }) {
+ *     interaction.reply('Pong!');
+ *   },
+ * });
+ * ```
+ */
 export class SparkCommand implements BaseCommand {
   /**
    * The name of the command. Will default to the file's name without the shortcut.

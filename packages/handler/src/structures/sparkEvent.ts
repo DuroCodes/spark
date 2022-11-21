@@ -31,10 +31,19 @@ import { EventOptions, EventRunner } from '../types/event';
  * ```
  */
 export class SparkEvent<Key extends keyof ClientEvents> implements EventOptions<Key> {
+  /**
+   * The name of the event. (Such as `'interactionCreate'`)
+   */
   public name!: Key;
 
+  /**
+   * The run function for the event. {@link EventRunner}
+   */
   public run!: EventRunner<Key>;
 
+  /**
+   * Whether the event should run once.
+   */
   public once?: boolean;
 
   constructor(options: EventOptions<Key>) {
