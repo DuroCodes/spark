@@ -1,7 +1,8 @@
-const { SparkCommand, CommandType } = require('@spark.ts/handler');
+const { SparkCommand, CommandType, Plugins } = require('@spark.ts/handler');
 
-export default new SparkCommand({
+module.exports = new SparkCommand({
   type: CommandType.Slash,
+  plugins: [Plugins.Publish()],
   run({ interaction }) {
     interaction.reply('pong');
   },

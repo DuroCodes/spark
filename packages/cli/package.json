@@ -1,6 +1,6 @@
 {
   "name": "create-spark",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "a cli for @spark.ts",
   "main": "./dist/index.js",
   "bin": "./dist/index.js",

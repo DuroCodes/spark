@@ -22,7 +22,7 @@ import { EventOptions, EventRunner } from '../types/event';
  * // JavaScript (CJS)
  * const { SparkEvent } = require('@spark.ts/handler');
  *
- * exports.default = new SparkEvent({
+ * module.exports = new SparkEvent({
  *   name: 'ready',
  *   run() {
  *     console.log('Online!');

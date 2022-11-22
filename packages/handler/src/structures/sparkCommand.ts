@@ -22,7 +22,7 @@ import { SlashCommandPlugin, TextCommandPlugin } from '../types/plugin';
  * // JavaScript (CJS)
  * const { SparkCommand } = require('@spark.ts/handler');
  *
- * exports.default = new SparkCommand({
+ * module.exports = new SparkCommand({
  *   name: 'ping',
  *   run({ interaction }) {
  *     interaction.reply('Pong!');

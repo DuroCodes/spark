@@ -1,5 +1,8 @@
 {
   "type": "module",
+  "scripts": {
+    "start": "tsc && node dist/index.js"
+  },
   "dependencies": {
     "@spark.ts/handler": "latest",
     "discord.js": "14.6.0",
