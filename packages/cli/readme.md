@@ -9,7 +9,7 @@ To get started wtih `create-spark`, run any of the following three commands and 
 ### npm
 
 ```sh
-npm init spark
+npm create spark
 ```
 
 ### yarn
