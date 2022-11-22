@@ -7,7 +7,7 @@ export namespace Store {
    * Stores application commands, including slash and application commands.
   */
   // TODO: Add support for other command types. (Such as user commands)
-  export const applicationCommands = {
+  export const ApplicationCommands = {
     [ApplicationCommandType.ChatInput]: new Collection<string, SlashCommand>(),
   };
 
@@ -15,7 +15,7 @@ export namespace Store {
    * The text commands.
    * Stores text commands and aliases for the handler.
    */
-  export const textCommands = {
+  export const TextCommands = {
     text: new Collection<string, TextCommand>(),
     aliases: new Collection<string, TextCommand>(),
   };

@@ -1,30 +1,19 @@
 import {
-  ApplicationCommandType,
   BitFieldResolvable,
   CacheFactory,
   Client,
-  ClientEvents,
   GatewayIntentsString,
   MessageMentionOptions,
   Partials,
   PresenceData,
   RESTOptions,
-  Routes,
   SweeperOptions,
   WebSocketOptions,
 } from 'discord.js';
-import glob from 'fast-glob';
-import { parse } from 'path';
 import { Logger, LogLevel } from '@spark.ts/logger';
-import {
-  CommandType,
-  InputCommand,
-} from '../types/command';
-import { importFile } from '../util/importFile';
-import { Store } from '../util/store';
 import { InteractionHandler } from '../events/interactionCreate';
 import { MessageHandler } from '../events/messageCreate';
-import { SparkEvent } from './sparkEvent';
+import { ReadyHandler } from '../events/readyHandler';
 
 export interface SparkClientDirectories {
   /**
@@ -125,101 +114,17 @@ export class SparkClient<Ready extends boolean = boolean> extends Client<Ready> 
   }
 
   /**
-   * Registers the slash & text commands for the client.
-   */
-  private async initCommands(clientId: string) {
-    const commandFiles = await glob(`${this.directories.commands}/**/*{.js,.ts}`);
-
-    for await (const path of commandFiles) {
-      const command = await importFile<InputCommand>(path);
-
-      const cmd = {
-        ...command,
-        name: command.name ?? parse(path).name,
-        description: command.description ?? '...',
-      };
-
-      if (cmd.type === CommandType.Slash) {
-        this.logger.debug(`Registered Slash Command: ${cmd.name}`);
-
-        Store.applicationCommands[
-          ApplicationCommandType.ChatInput
-        ].set(cmd.name, cmd);
-      }
-
-      if (cmd.type === CommandType.Text) {
-        this.logger.debug(`Registered Text Command: ${cmd.name}`);
-
-        Store.textCommands.text.set(cmd.name, cmd);
-
-        if (cmd.aliases) {
-          cmd.aliases.forEach((alias) => Store.textCommands.aliases.set(alias, cmd));
-        }
-      }
-    }
-
-    const body = Store.applicationCommands[ApplicationCommandType.ChatInput].map(
-      ({ name, description, options }) => ({ name, description, options }),
-    );
-
-    try {
-      await this.rest.put(Routes.applicationCommands(clientId), {
-        body,
-      });
-
-      this.logger.info(`Registered global slash commands. (${body.length} Loaded)`);
-    } catch (e) {
-      this.logger.error(e);
-    }
-  }
-
-  /**
-   * Registers the event listeners for the client.
-   */
-  public async initEvents() {
-    const eventFiles = await glob(`${this.directories.events}/**/*{.js,.ts}`);
-
-    for await (const path of eventFiles) {
-      const event = await importFile<SparkEvent<keyof ClientEvents>>(path);
-
-      const evt: SparkEvent<keyof ClientEvents> = {
-        ...event,
-        name: event.name ?? parse(path).name,
-        once: event.once ?? false,
-        run: event.run ?? (() => null),
-      };
-
-      if (evt.once) {
-        this.logger.debug(`Loading ${evt.name} as a 'once' event listener.`);
-        this.on(evt.name, evt.run);
-      }
-
-      if (!evt.once) {
-        this.logger.debug(`Loading ${evt.name} event listener.`);
-        this.on(evt.name, evt.run);
-      }
-    }
-  }
-
-  /**
-   * Initializes the commands and registers slash commands if available.
-   */
-  private async init(clientId: string) {
-    this.initCommands(clientId);
-    this.initEvents();
-  }
-
-  /**
    * Registers the handler and logs into the bot.
-   * Usage: `client.start(token, clientId)`
+   * Usage: `client.login(token)`
    */
-  async start(token: string, clientId: string) {
-    this.init(clientId);
-
+  override async login(token: string): Promise<string> {
     new InteractionHandler(this);
     new MessageHandler(this);
+    new ReadyHandler(this);
 
     super.login(token);
+
+    return this.token!;
   }
 }
 

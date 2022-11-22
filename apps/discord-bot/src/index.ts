@@ -7,7 +7,7 @@ const client = new SparkClient({
     commands: './dist/commands',
     events: './dist/events',
   },
-  logLevel: 'info',
+  logLevel: 'debug',
 });
 
-client.start(env.DISCORD_TOKEN, env.CLIENT_ID);
+client.login(env.DISCORD_TOKEN);

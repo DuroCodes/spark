@@ -16,12 +16,38 @@ export interface Controller {
 export interface BasePlugin {
   name?: string;
   description?: string;
-  run: () => Awaitable<void | unknown>;
+  preprocess?: boolean;
+  run: () => Awaitable<Result<void, void>>;
 }
 
-export type TextCommandPlugin = Override<
+export type PreprocessTextCommandPlugin = Override<
   BasePlugin,
   {
+    preprocess: true,
+    run: (options: {
+      client: Client,
+      controller: Controller;
+      command: TextCommand;
+    }) => Awaitable<Result<void, void>>;
+  }
+>;
+
+export type PreprocessSlashCommandPlugin = Override<
+  BasePlugin,
+  {
+    preprocess: true,
+    run: (options: {
+      client: Client,
+      controller: Controller;
+      command: SlashCommand;
+    }) => Awaitable<Result<void, void>>;
+  }
+>;
+
+export type NonPreprocessTextCommandPlugin = Override<
+  BasePlugin,
+  {
+    preprocess: false,
     run: (options: {
       client: Client;
       message: Message;
@@ -31,9 +57,10 @@ export type TextCommandPlugin = Override<
   }
 >;
 
-export type SlashCommandPlugin = Override<
+export type NonPreprocessSlashCommandPlugin = Override<
   BasePlugin,
   {
+    preprocess: false,
     run: (options: {
       client: Client;
       interaction: ChatInputCommandInteraction;
@@ -42,3 +69,14 @@ export type SlashCommandPlugin = Override<
     }) => Awaitable<Result<void, void>>;
   }
 >;
+
+export type NonPreprocessCommandPlugin =
+  NonPreprocessTextCommandPlugin | NonPreprocessSlashCommandPlugin;
+
+export type PreprocessCommandPlugin =
+  PreprocessTextCommandPlugin | PreprocessSlashCommandPlugin;
+
+export type SlashCommandPlugin = NonPreprocessSlashCommandPlugin | PreprocessSlashCommandPlugin;
+export type TextCommandPlugin = NonPreprocessTextCommandPlugin | PreprocessTextCommandPlugin;
+
+export type CommandPlugin = PreprocessCommandPlugin | NonPreprocessCommandPlugin;

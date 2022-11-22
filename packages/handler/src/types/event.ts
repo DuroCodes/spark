@@ -9,3 +9,5 @@ export interface EventOptions<Key extends keyof ClientEvents> {
   run: EventRunner<Key>;
   once?: boolean;
 }
+
+export type Event = EventOptions<keyof ClientEvents>;

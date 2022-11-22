@@ -21,7 +21,11 @@ import { SlashCommandPlugin } from '@spark.ts/handler';
 
 export function ownerOnly(ownerIds: string[]): SlashCommandPlugin {
   return {
-    // Description of the plugin, this is mainly for documentation.
+    // Whether the event should run while the command gets registed & not when the command is executed.
+    preprocess: false,
+
+    // Name & description of the plugin, this is mainly for documentation.
+    name: 'Owner only plugin',
     description: 'Only allows the owner to run the command.',
 
     // Logic for the plugin.
@@ -72,3 +76,15 @@ The controller is what controls your flow of your code. If you do `controller.st
 Please make sure to return this upon an error in your plugin. For example, if the user is not permitted to use the command, you return `controller.stop()` in your plugin.
 
 If you have a success in your plugin, return `controller.next()`. This will continue on with the command, and other plugins.
+
+
+## Pre-Process Plugins
+
+Plugins that run while your command get registered are called **pre-process plugins.**
+
+To create a pre-process plugin, just add the `preprocess: true` option to your plugin function's return object.
+
+<Callout>
+  Pre-process plugins run while the command is registered.
+  This means pre-process plugins don't have access to `interaction` or `message`.
+</Callout>

@@ -132,11 +132,5 @@ exports.default = client;
 
 ## Starting Your Bot
 
-With Spark, change:
-
-```diff
-- client.login('<token>');
-+ client.start('<token>', '<client id>')
-```
-
-You need to do `client.start()` so Spark can initialize your commands and events.
+With Spark, all you have to do is `client.login(token)`.
+This initializes all of your commands, events, and pre-process plugins (if applicable).

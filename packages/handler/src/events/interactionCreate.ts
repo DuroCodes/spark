@@ -17,6 +17,8 @@ async function slashCommandHandler(
   try {
     if (command.plugins) {
       for await (const plugin of command.plugins) {
+        if (plugin.preprocess) continue;
+
         const { err } = await plugin.run({
           client: interaction.client,
           interaction,
@@ -40,7 +42,7 @@ async function slashCommandHandler(
 
 export function onInteractionCreate(interaction: Interaction) {
   if (interaction.isChatInputCommand()) {
-    const command = Store.applicationCommands[
+    const command = Store.ApplicationCommands[
       ApplicationCommandType.ChatInput
     ].get(interaction.commandName);
 

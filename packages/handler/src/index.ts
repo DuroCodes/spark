@@ -14,3 +14,4 @@ export {
 } from './types/plugin';
 export { EventOptions, EventRunner } from './types/event';
 export { Store } from './util/store';
+export { Plugins } from './util/plugins';

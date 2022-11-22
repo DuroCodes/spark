@@ -12,6 +12,8 @@ async function textCommandHandler(
   try {
     if (command.plugins) {
       for await (const plugin of command.plugins) {
+        if (plugin.preprocess) continue;
+
         const { err } = await plugin.run({
           client: message.client,
           message,
@@ -44,8 +46,8 @@ export async function onMessageCreate(message: Message) {
 
   if (!cmd) return;
 
-  const command = Store.textCommands.text.get(cmd.toLocaleLowerCase())
-    ?? Store.textCommands.aliases.get(cmd.toLocaleLowerCase());
+  const command = Store.TextCommands.text.get(cmd.toLocaleLowerCase())
+    ?? Store.TextCommands.aliases.get(cmd.toLocaleLowerCase());
 
   if (!command) return;
 

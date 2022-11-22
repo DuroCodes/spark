@@ -7,7 +7,7 @@ import {
   Message,
 } from 'discord.js';
 import { SlashCommandPlugin, TextCommandPlugin } from './plugin';
-import { Override } from './util';
+import { DefinitelyDefined, Override } from './util';
 
 export enum CommandType {
   Text = 'text',
@@ -40,7 +40,6 @@ export type SlashCommand = Override<
     type: CommandType.Slash | `${CommandType.Slash}`;
     options?: ApplicationCommandOptionData[];
     plugins?: SlashCommandPlugin[];
-    guildIds?: string[];
     run: (options: {
       client: Client;
       interaction: ChatInputCommandInteraction;
@@ -59,3 +58,5 @@ export type Command = TextCommand | SlashCommand;
 export type InputCommand = {
   [T in CommandType]: CommandDefs[T]
 }[CommandType];
+
+export type DefinedCommand = DefinitelyDefined<Command, 'name' | 'description'>;

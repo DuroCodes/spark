@@ -9,7 +9,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  ignorePatterns: ['*.md'],
+  ignorePatterns: ['*.md', 'dist', 'node_modules'],
   plugins: ['@typescript-eslint'],
   rules: {
     'import/prefer-default-export': 'off',
@@ -28,6 +28,8 @@ module.exports = {
     'consistent-return': 'off',
     'class-methods-use-this': 'off',
     'jsx-quotes': ['error', 'prefer-double'],
+    'no-continue': 'off',
+    'no-dupe-class-members': 'off',
   },
   globals: {
     JSX: true,

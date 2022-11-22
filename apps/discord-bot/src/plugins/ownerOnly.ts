@@ -7,6 +7,7 @@ function mapUsers(ids: string[]) {
 
 export function ownerOnlySlash(ownerIds: string[]): SlashCommandPlugin {
   return {
+    preprocess: false,
     description: 'Only allows the owner to run the command.',
     async run({ interaction, controller }) {
       if (ownerIds.includes(interaction.user.id)) {
@@ -25,6 +26,7 @@ export function ownerOnlySlash(ownerIds: string[]): SlashCommandPlugin {
 
 export function ownerOnlyText(ownerIds: string[]): TextCommandPlugin {
   return {
+    preprocess: false,
     description: 'Only allows the owner to run the command.',
     async run({ message, controller }) {
       if (ownerIds.includes(message.author.id)) {

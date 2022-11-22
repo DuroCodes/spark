@@ -29,6 +29,35 @@ export default new SparkCommand({
 
 Inside of the run function, you can use `interaction`, `client`, and `args`. (`args` is the same as `interaction.options`)
 
+### Publishing
+
+To publish your command, add the `Plugins.Publish()` plugin from `@spark.ts/handler`.
+
+```ts
+import { SparkCommand, CommandType, Plugins } from '@spark.ts/handler';
+
+export default new SparkCommand({
+  type: CommandType.Slash, // you can also use 'slash'
+  name: 'ping', // if you don't input this, it'll use the file name (ex: foo.ts -> 'foo')
+  description: 'replies with pong', // if you don't input this, it'll use '...'
+  plugins: [Plugins.Publish()],
+  run({ interaction, client }) {
+    client.logger.debug('pong');
+    interaction.reply('pong');
+  },
+});
+```
+
+You can add various options to the publish plugin:
+
+```ts
+export interface PublishOptions {
+  guildIds?: GuildId[]; // type GuildId = `${number}`;
+  dmPermission?: boolean; // whether the bot should publish the command in dms
+  defaultMemberPermissions?: PermissionResolvable | null; // default member permissions to run the command
+}
+```
+
 ## Text Commands
 
 ```ts filename="src/commands/ping.ts"
