@@ -20,7 +20,7 @@ const client = new SparkClient({
   logLevel: 'info', // log level used for the logger, if this is on `debug`, you'll see debug messages
 });
 
-client.start(process.env.DISCORD_TOKEN, process.env.CLIENT_ID);
+client.login(process.env.DISCORD_TOKEN);
 ```
 
 **CommonJS**
@@ -35,5 +35,5 @@ const client = new SparkClient({
   logLevel: 'info', // log level used for the logger, if this is on `debug`, you'll see debug messages
 });
 
-client.start(process.env.DISCORD_TOKEN, process.env.CLIENT_ID);
+client.login(process.env.DISCORD_TOKEN);
 ```
