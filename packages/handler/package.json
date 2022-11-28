@@ -1,6 +1,6 @@
 {
   "name": "@spark.ts/handler",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "a discord.js handler in typescript",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@spark.ts/logger": "workspace:^",
-    "discord.js": "^14.3.0",
+    "discord.js": "^14.7.0",
     "fast-glob": "^3.2.12",
     "ts-pattern": "^4.0.6",
     "ts-results-es": "^3.5.0"
