@@ -1,4 +1,4 @@
-import { ApplicationCommandType, Client, ClientEvents } from 'discord.js';
+import { ApplicationCommandType, Client } from 'discord.js';
 import { Err, Ok, Result } from 'ts-results-es';
 import { parse } from 'path';
 import { match } from 'ts-pattern';
