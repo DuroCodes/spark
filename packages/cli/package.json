@@ -30,7 +30,7 @@
     "ora": "^6.1.2"
   },
   "devDependencies": {
-    "@types/inquirer": "9.0.2",
+    "@types/inquirer": "9.0.3",
     "eslint-config-custom": "workspace:*",
     "typescript": "4.8.4"
   }
