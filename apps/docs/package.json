@@ -12,7 +12,7 @@
   "author": "DuroCodes",
   "license": "MIT",
   "dependencies": {
-    "@heroicons/react": "1.0.6",
+    "@heroicons/react": "2.0.13",
     "@react-aria/ssr": "3.3.0",
     "copy-to-clipboard": "3.3.2",
     "next": "12.3.1",
