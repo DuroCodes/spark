@@ -28,32 +28,32 @@ const loggerInfo: LoggerData = {
   },
   error: {
     title: {
-      highlight: colors.redBright.inverse.bold(' ERROR '),
-      bracket: colors.redBright.bold('[ERROR]'),
+      highlight: colors.redBright.inverse.bold('  ERROR  '),
+      bracket: colors.redBright.bold('[ ERROR ]'),
     },
     color: 'redBright',
     level: 4,
   },
   warn: {
     title: {
-      highlight: colors.yellowBright.inverse.bold(' WARN '),
-      bracket: colors.yellowBright.bold('[WARN]'),
+      highlight: colors.yellowBright.inverse.bold('  WARN   '),
+      bracket: colors.yellowBright.bold('[ WARN  ]'),
     },
     color: 'yellowBright',
     level: 3,
   },
   info: {
     title: {
-      highlight: colors.cyanBright.inverse.bold(' INFO '),
-      bracket: colors.cyanBright.bold('[INFO]'),
+      highlight: colors.cyanBright.inverse.bold('  INFO   '),
+      bracket: colors.cyanBright.bold('[ INFO  ]'),
     },
     color: 'cyanBright',
     level: 2,
   },
   debug: {
     title: {
-      highlight: colors.magentaBright.inverse.bold(' DEBUG '),
-      bracket: colors.magentaBright.bold('[DEBUG]'),
+      highlight: colors.magentaBright.inverse.bold('  DEBUG  '),
+      bracket: colors.magentaBright.bold('[ DEBUG ]'),
     },
     color: 'magentaBright',
     level: 1,
