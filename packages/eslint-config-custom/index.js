@@ -30,6 +30,7 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-double'],
     'no-continue': 'off',
     'no-dupe-class-members': 'off',
+    'no-param-reassign': 'off',
   },
   globals: {
     JSX: true,

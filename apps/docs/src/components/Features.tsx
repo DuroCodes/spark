@@ -1,11 +1,11 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { DOCS_FEATURES, HOME_FEATURES } from '~/content/features';
 import Feature from './Feature';
 
 export function DetailedFeaturesGrid({
   children,
 }: {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) {
   return (
     <div className="grid grid-cols-1 mt-12 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
@@ -30,7 +30,7 @@ export function HomeFeatures() {
 
 export function DocsFeatures({ detailed = true }: { detailed?: boolean; }) {
   return (
-    <div className="grid grid-cols-2 gap-6 my-12 sm:grid-cols-3 ">
+    <div className="grid grid-cols-2 gap-6 my-12 sm:grid-cols-3">
       {DOCS_FEATURES.map((feature) => (
         <Feature
           key={feature.name.split(' ').join('-')}

@@ -111,8 +111,10 @@ babel.config.js
 
 tsup.config.js
 
+tsup.config.ts
+
 tsconfig-base.json
 
-tsconfig.cjs.json
+tsconfig-cjs.json
 
-tsconfig.esm.json
+tsconfig-esm.json

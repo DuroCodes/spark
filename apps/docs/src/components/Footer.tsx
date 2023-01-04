@@ -7,7 +7,7 @@ export function Footer() {
         Footer
       </h2>
       <div className="md:flex md:items-center md:justify-between">
-        <p className="text-xs text-gray-500 ">
+        <p className="text-xs text-gray-500">
           <SparkLogo height={48} />
           &copy; {new Date().getFullYear()} Spark. All rights reserved.
         </p>

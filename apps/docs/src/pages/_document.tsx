@@ -1,7 +1,7 @@
 import Document, {
   Html, Head, Main, NextScript,
+  DocumentInitialProps, DocumentContext,
 } from 'next/document';
-import type { DocumentInitialProps, DocumentContext } from 'next/document';
 
 class MyDocument extends Document {
   static async getInitialProps(

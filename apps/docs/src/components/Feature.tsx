@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import type { Feature as Feat } from '~/content/features';
+import { Feature as Feat } from '~/content/features';
 
 type FeatureProps = {
   feature: Omit<Feat, 'page'>;
   detailed?: boolean;
 };
 
-const DetailedFeatureInner = (props: { feature: FeatureProps['feature'] }) => {
+const DetailedFeatureInner = (props: { feature: FeatureProps['feature']; }) => {
   const { Icon, name, description } = props.feature;
   return (
     <>
@@ -41,11 +41,11 @@ export const DetailedFeatureLink = (props: {
   href: string;
   feature: FeatureProps['feature'];
 }) => (
-    <Link href={props.href}>
-      <a className={featureWrapperClasses}>
-        <DetailedFeatureInner feature={props.feature}></DetailedFeatureInner>
-      </a>
-    </Link>
+  <Link href={props.href}>
+    <a className={featureWrapperClasses}>
+      <DetailedFeatureInner feature={props.feature}></DetailedFeatureInner>
+    </a>
+  </Link>
 );
 
 export default function Feature(props: FeatureProps) {

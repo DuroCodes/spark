@@ -1,0 +1,50 @@
+---
+title: Publishing Plugins to the Spark website
+description: Publish plugins for other users to use
+---
+
+import Callout from '~/components/Callout';
+
+# Publishing Plugins
+
+Publishing Plugins are a great way to showcase your plugins, and allow other users to use them.
+
+When publishing a plugin, please make sure you include the following:
+
+- A link to where the user can view the code.
+- A description of what the plugin is/does.
+- Example usage of the plugin.
+
+<Callout type="info">
+  You can use markdown inside of your plugin description.
+</Callout>
+
+## Example Plugin
+
+Here's an example of how you could publish a plugin:
+
+### Name:
+
+`'owner only'`
+
+### Description:
+
+~~~mdx
+## Plugin Description
+
+This plugin only allows certain users to run the command.
+
+## Example Usage
+
+You can use this plugin in the `plugins` option in your command.
+
+Such as this:
+
+```ts
+plugins: [ownerOnly(['your user id', 'another user id'])]
+```
+
+## Installation
+
+You can install this plugin from my GitHub here, https://github.com/username/plugin
+~~~

@@ -21,7 +21,7 @@ const theme = {
   feedback: {
     link: 'Question? Give us feedback →',
   },
-  logo: function LogoActual() {
+  logo() {
     return (
       <>
         <SparkLogo height={32} />
@@ -77,7 +77,7 @@ const theme = {
     );
   },
   editLink: {
-    text: 'Edit this page on GitHub',
+    text: 'Edit this page on GitHub →',
   },
   footer: {
     text: () => <Footer />,

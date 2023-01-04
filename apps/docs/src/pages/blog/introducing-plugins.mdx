@@ -14,7 +14,7 @@ Spark now has plugin support! With plugins, you can create reusable actions with
 
 To create a plugin, simply create a function:
 
-```ts filename="src/plugins/ownerOnly.ts"
+```ts filename="src/plugins/ownerOnly.ts" copy
 // This is an example plugin for a 'owner only' slash command plugin.
 // For a text command plugin, you'd just have to use message instead of interaction.
 
@@ -48,7 +48,7 @@ To add a plugin to a command, you can add the function inside of the `plugins` o
 
 For example, if you'd like to add the `ownerOnly` plugin to the command, you'd use:
 
-```ts filename="src/commands/ownerOnly.ts"
+```ts filename="src/commands/ownerOnly.ts" copy
 import { SparkCommand } from '@spark.ts/handler';
 
 export default new SparkCommand({

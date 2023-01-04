@@ -1,5 +1,4 @@
-import type { FC } from 'react';
-
+import { FC } from 'react';
 import { Tabs as NextraTabs, Tab } from 'nextra-theme-docs';
 import useSWR from 'swr';
 
@@ -8,7 +7,7 @@ export { Tab };
 export const Tabs: FC<{
   storageKey?: string;
   items: string[];
-// eslint-disable-next-line func-names
+  // eslint-disable-next-line func-names
 }> = function ({
   storageKey = 'tab-index', items, children = null, ...props
 }) {

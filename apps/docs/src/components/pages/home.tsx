@@ -24,7 +24,7 @@ export default function Home() {
         <h1 className="max-w-5xl text-center mx-auto text-6xl font-extrabold tracking-tighter leading-[1.1] sm:text-7xl lg:text-8xl xl:text-8xl">
           Discord bots
           <br className="hidden lg:block" />
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-pink-gradient-start to-blue-500 ">
+          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-pink-gradient-start to-blue-500">
             made simpler.
           </span>{' '}
         </h1>
@@ -32,7 +32,7 @@ export default function Home() {
           Spark is a Discord.js handler for TypeScript & JavaScript projects.
         </p>
         <div className="max-w-xl mx-auto mt-5 sm:flex sm:justify-center md:mt-8">
-          <div className="rounded-md ">
+          <div className="rounded-md">
             <Link href="/docs">
               <a className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white no-underline bg-black border border-transparent rounded-md dark:bg-white dark:text-black betterhover:dark:hover:bg-gray-300 betterhover:hover:bg-gray-700 md:py-3 md:text-lg md:px-10 md:leading-6">
                 Start Building →

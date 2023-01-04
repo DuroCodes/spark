@@ -109,10 +109,8 @@ CODE_OF_CONDUCT.md
 
 babel.config.js
 
+tsconfig.json
+
 tsup.config.js
 
-tsconfig-base.json
-
-tsconfig.cjs.json
-
-tsconfig.esm.json
+tsup.config.ts

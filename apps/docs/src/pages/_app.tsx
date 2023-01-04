@@ -1,7 +1,15 @@
 import '~/styles/styles.css';
 import '~/styles/custom.css';
+import 'nextra-theme-docs';
 
 import { SSRProvider } from '@react-aria/ssr';
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { SessionProvider } from 'next-auth/react';
+import { AppType } from 'next/app';
+import { Session } from 'next-auth';
+import { trpc } from '~/utils/trpc';
+
+const queryClient = new QueryClient();
 
 // Shim requestIdleCallback in Safari
 if (typeof window !== 'undefined' && !('requestIdleCallback' in window)) {
@@ -9,10 +17,13 @@ if (typeof window !== 'undefined' && !('requestIdleCallback' in window)) {
   (window as any).cancelIdleCallback = (e) => clearTimeout(e);
 }
 
-export default function Nextra({ Component, pageProps }) {
-  return (
+const MyApp: AppType<{ session: Session | null; }> = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => (
+  <QueryClientProvider client={queryClient}>
     <SSRProvider>
-      <>
+      <SessionProvider session={session}>
         <svg height="0px" width="0px">
           <defs>
             <linearGradient
@@ -27,8 +38,10 @@ export default function Nextra({ Component, pageProps }) {
             </linearGradient>
           </defs>
         </svg>
-      </>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
+      </SessionProvider>
     </SSRProvider>
-  );
-}
+  </QueryClientProvider>
+);
+
+export default trpc.withTRPC(MyApp);

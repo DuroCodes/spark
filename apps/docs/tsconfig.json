@@ -29,7 +29,7 @@
     "nextra.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/pages/plugins/index.mdx", "src/pages/plugins.mdx"  ],
   "exclude": [
     "node_modules"
   ]

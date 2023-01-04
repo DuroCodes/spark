@@ -1,0 +1,12 @@
+{
+  "*": {
+    "//": "Hide all the links from the sidebar or navbar, and disable ToC, Breadcrumb and Sidebar for these pages.",
+    "hidden": true,
+    "theme": {
+      "toc": false,
+      "sidebar": false,
+      "breadcrumb": false,
+      "typesetting": "article"
+    }
+  }
+}
