@@ -6,11 +6,11 @@ description: Check out this Spark plugin
 import { useSSG } from 'nextra/ssg';
 import Error from 'next/error';
 import { MDXRemote } from 'next-mdx-remote'
-
 import { useRouter } from 'next/router';
 import { trpc } from '~/utils/trpc';
 import { mdxToHtml } from '~/utils/mdxToHtml'
 import Callout from '~/components/Callout';
+import { prisma } from '~/server/server/db/client'
 
 export const getServerSideProps = async ({ query }) => {
   const plugin = await prisma.plugin.findFirst({ where: { id: query.id } })
