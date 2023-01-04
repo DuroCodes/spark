@@ -7,7 +7,9 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "prisma:generate": "prisma generate"
   },
   "author": "DuroCodes",
   "license": "MIT",
