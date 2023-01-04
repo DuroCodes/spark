@@ -18,7 +18,7 @@ export const getServerSideProps = async ({ query }) => {
   return { props: { ssg: { html } }}
 }
  
-export const Stars = () => {
+export const PluginPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data: plugin, status } = trpc.plugins.findById.useQuery(id);
@@ -49,4 +49,4 @@ export const Stars = () => {
   )
 }
  
-<Stars />
+<PluginPage />
