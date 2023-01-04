@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { Plugin } from '@prisma/client';
 import { router, publicProcedure } from '../trpc';
 
 const pluginSchema = z.object({
@@ -17,7 +16,8 @@ export const pluginRouter = router({
     .input(pluginSchema)
     .mutation(async ({ ctx, input }) => {
       await ctx.prisma.plugin.create({
-        data: input as Plugin,
+        // @ts-ignore
+        data: input,
       });
     }),
 
