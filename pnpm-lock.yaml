@@ -60,6 +60,7 @@ importers:
       rehype-add-classes: ^1.0.0
       rehype-pretty-code: ^0.6.0
       remark-gfm: ^3.0.1
+      shiki: 0.10.1
       superjson: ^1.12.1
       swr: 1.3.0
       tailwindcss: 3.1.8
@@ -86,8 +87,9 @@ importers:
       react-hook-form: 7.41.0_react@17.0.2
       react-hot-toast: 2.4.0_pwge5r66yg44rq5pj4ruhckhdm
       rehype-add-classes: 1.0.0
-      rehype-pretty-code: 0.6.0_shiki@0.12.1
+      rehype-pretty-code: 0.6.0_shiki@0.10.1
       remark-gfm: 3.0.1
+      shiki: 0.10.1
       superjson: 1.12.1
       swr: 1.3.0_react@17.0.2
       zod: 3.20.2
@@ -5178,7 +5180,7 @@ packages:
       shiki: 0.10.1
     dev: false
 
-  /rehype-pretty-code/0.6.0_shiki@0.12.1:
+  /rehype-pretty-code/0.6.0_shiki@0.10.1:
     resolution: {integrity: sha512-VfntYoWYOBVURXYDdB8p/E1sZTm2W5ry89fJyY94WJAo1jUH/5sVhDC7cX5PPnksMyW9PYMxRLNfjkBpSgJrzQ==}
     engines: {node: ^12.16.0 || >=13.2.0}
     peerDependencies:
@@ -5187,7 +5189,7 @@ packages:
       hash-obj: 4.0.0
       nanoid: 4.0.0
       parse-numeric-range: 1.3.0
-      shiki: 0.12.1
+      shiki: 0.10.1
     dev: false
 
   /remark-gfm/3.0.1:
@@ -5390,14 +5392,6 @@ packages:
       jsonc-parser: 3.2.0
       vscode-oniguruma: 1.7.0
       vscode-textmate: 5.2.0
-    dev: false
-
-  /shiki/0.12.1:
-    resolution: {integrity: sha512-aieaV1m349rZINEBkjxh2QbBvFFQOlgqYTNtCal82hHj4dDZ76oMlQIX+C7ryerBTDiga3e5NfH6smjdJ02BbQ==}
-    dependencies:
-      jsonc-parser: 3.2.0
-      vscode-oniguruma: 1.7.0
-      vscode-textmate: 8.0.0
     dev: false
 
   /side-channel/1.0.4:
@@ -6136,10 +6130,6 @@ packages:
 
   /vscode-textmate/5.2.0:
     resolution: {integrity: sha512-Uw5ooOQxRASHgu6C7GVvUxisKXfSgW4oFlO+aa+PAkgmH89O3CXxEEzNRNtHSqtXFTl0nAC1uYj0GMSH27uwtQ==}
-    dev: false
-
-  /vscode-textmate/8.0.0:
-    resolution: {integrity: sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==}
     dev: false
 
   /wcwidth/1.0.1:
