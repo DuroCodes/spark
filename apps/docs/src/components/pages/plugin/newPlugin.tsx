@@ -13,7 +13,7 @@ const schema = z.object({
     .max(50, { message: 'Plugin name must be less than 50 characters.' }),
   description: z.string()
     .min(50, { message: 'Plugin description must be more than 50 characters.' })
-    .max(1000, { message: 'Plugin description must be less than 1000 characters.' }),
+    .max(5000, { message: 'Plugin description must be less than 5000 characters.' }),
 });
 
 function useZodForm<TSchema extends z.ZodType>(
