@@ -3,7 +3,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 import rehypeAddClasses from 'rehype-add-classes';
 import rehypePrettyCode from 'rehype-pretty-code';
-import theme from '~/utils/theme.json';
+import { readFileSync } from 'fs';
 import { router, publicProcedure } from '../trpc';
 
 const pluginSchema = z.object({
@@ -15,6 +15,8 @@ const pluginSchema = z.object({
     image: z.string(),
   }),
 });
+
+const theme = JSON.parse(readFileSync(`${process.cwd()}/src/utils/theme.json`, 'utf8'));
 
 const rehypePrettyCodeOptions = {
   theme,
