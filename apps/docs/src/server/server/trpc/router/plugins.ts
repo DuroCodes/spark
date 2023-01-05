@@ -1,9 +1,10 @@
 import { z } from 'zod';
+import { getHighlighter } from 'shiki';
+import { join as pathJoin } from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 import rehypeAddClasses from 'rehype-add-classes';
 import rehypePrettyCode from 'rehype-pretty-code';
-import { readFileSync } from 'fs';
 import { router, publicProcedure } from '../trpc';
 
 const pluginSchema = z.object({
@@ -15,23 +16,6 @@ const pluginSchema = z.object({
     image: z.string(),
   }),
 });
-
-const theme = JSON.parse(readFileSync(`${process.cwd()}/src/utils/theme.json`, 'utf8'));
-
-const rehypePrettyCodeOptions = {
-  theme,
-  onVisitLine(node: any) {
-    if (node.children.length === 0) {
-      node.children = [{ type: 'text', value: ' ' }];
-    }
-  },
-  onVisitHighlightedLine(node: any) {
-    node.properties.className.push('highlighted');
-  },
-  onVisitHighlightedWord(node: any) {
-    node.properties.className = ['highlighted'];
-  },
-};
 
 export const pluginRouter = router({
   create: publicProcedure
@@ -47,6 +31,23 @@ export const pluginRouter = router({
     .input(z.string())
     .query(async ({ ctx, input }) => {
       const data = await ctx.prisma.plugin.findFirst({ where: { id: input } });
+
+      const highlighter = await getHighlighter({ theme: 'css-variables' });
+
+      const rehypePrettyCodeOptions = {
+        highlighter,
+        onVisitLine(node: any) {
+          if (node.children.length === 0) {
+            node.children = [{ type: 'text', value: ' ' }];
+          }
+        },
+        onVisitHighlightedLine(node: any) {
+          node.properties.className.push('highlighted');
+        },
+        onVisitHighlightedWord(node: any) {
+          node.properties.className = ['highlighted'];
+        },
+      };
 
       const html = await serialize(data.description, {
         mdxOptions: {
