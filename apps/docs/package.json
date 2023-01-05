@@ -42,7 +42,7 @@
     "zod": "^3.20.2"
   },
   "devDependencies": {
-    "@babel/core": "7.19.3",
+    "@babel/core": "7.20.12",
     "@types/node": "16.11.68",
     "@types/react": "17.0.50",
     "autoprefixer": "10.4.12",
