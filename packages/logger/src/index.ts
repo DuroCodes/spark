@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable max-classes-per-file */
 import colors from 'ansi-colors';
 import { format } from 'util';
 
@@ -181,5 +182,39 @@ export class Logger extends console.Console {
    */
   override debug(...args: unknown[]) {
     this.logMessage(format(...args), 'debug');
+  }
+}
+
+type LogFn = (...args: unknown[]) => unknown;
+type CallbackLogFn = (msg: string) => string;
+
+/**
+ * A customizable logger with custom methods & titles.
+ */
+export class CustomLogger {
+  /**
+   * Configure the methods for the logger.
+   */
+  public setMethods<Methods extends Record<string, CallbackLogFn>>(methods: Methods) {
+    return {
+      /**
+       * Sets the level of the logger. You can only see the logs from levels that are included here.
+       */
+      setLevel(level: (keyof Methods)[]) {
+        const obj = {} as Record<keyof Methods, LogFn>;
+
+        for (const key of Object.keys(methods) as (keyof Methods)[]) {
+          obj[key] = (...args: unknown[]) => {
+            if (!level.includes(key)) return;
+
+            const msg = format(...args);
+
+            console.log(methods[key]!(msg));
+          };
+        }
+
+        return obj;
+      },
+    };
   }
 }
