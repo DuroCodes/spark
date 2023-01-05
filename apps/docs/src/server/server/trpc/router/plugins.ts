@@ -42,8 +42,10 @@ export const pluginRouter = router({
 
       const highlighter = await getHighlighter({
         theme: 'theme',
+        langs: ['typescript', 'javascript'],
         paths: {
           themes: `${shikiPath()}/themes`,
+          languages: `${shikiPath()}/languages`,
         },
       });
 
