@@ -17,6 +17,14 @@ const pluginSchema = z.object({
   }),
 });
 
+const shikiPath = () => {
+  const path = process.env.SHIKI_PRODUCTION_PATH
+    ? pathJoin(process.cwd(), 'public/shiki')
+    : pathJoin(process.cwd(), 'public/shiki');
+
+  return path;
+};
+
 export const pluginRouter = router({
   create: publicProcedure
     .input(pluginSchema)
@@ -32,7 +40,12 @@ export const pluginRouter = router({
     .query(async ({ ctx, input }) => {
       const data = await ctx.prisma.plugin.findFirst({ where: { id: input } });
 
-      const highlighter = await getHighlighter({ theme: 'css-variables' });
+      const highlighter = await getHighlighter({
+        theme: 'theme',
+        paths: {
+          themes: `${shikiPath()}/themes`,
+        },
+      });
 
       const rehypePrettyCodeOptions = {
         highlighter,
