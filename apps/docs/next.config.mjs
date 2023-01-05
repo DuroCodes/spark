@@ -14,7 +14,6 @@ const nextConfig = withNextra({
   reactStrictMode: true,
   experimental: {
     legacyBrowsers: false,
-    topLevelAwait: true,
   },
   images: {
     remotePatterns: [

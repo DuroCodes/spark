@@ -41,7 +41,7 @@ export const pluginRouter = router({
       const data = await ctx.prisma.plugin.findFirst({ where: { id: input } });
 
       const highlighter = await getHighlighter({
-        theme: 'theme',
+        theme: 'nord',
         langs: ['typescript', 'javascript'],
         paths: {
           themes: `${shikiPath()}/themes`,
