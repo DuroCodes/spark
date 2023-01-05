@@ -4,7 +4,7 @@ import { join as pathJoin } from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 import rehypeAddClasses from 'rehype-add-classes';
-import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeShiki from '@leafac/rehype-shiki';
 import { router, publicProcedure } from '../trpc';
 
 const pluginSchema = z.object({
@@ -44,32 +44,17 @@ export const pluginRouter = router({
         theme: 'nord',
         langs: ['typescript', 'javascript'],
         paths: {
-          themes: `${shikiPath()}/themes`,
-          languages: `${shikiPath()}/languages`,
+          themes: `${shikiPath()}/themes/`,
+          languages: `${shikiPath()}/languages/`,
         },
       });
-
-      const rehypePrettyCodeOptions = {
-        highlighter,
-        onVisitLine(node: any) {
-          if (node.children.length === 0) {
-            node.children = [{ type: 'text', value: ' ' }];
-          }
-        },
-        onVisitHighlightedLine(node: any) {
-          node.properties.className.push('highlighted');
-        },
-        onVisitHighlightedWord(node: any) {
-          node.properties.className = ['highlighted'];
-        },
-      };
 
       const html = await serialize(data.description, {
         mdxOptions: {
           format: 'md',
           remarkPlugins: [remarkGfm],
           rehypePlugins: [
-            [rehypePrettyCode, rehypePrettyCodeOptions],
+            [rehypeShiki, { highlighter }],
             [rehypeAddClasses, {
               h1: 'mt-2 text-4xl font-bold tracking-tight',
               h2: 'font-semibold tracking-tight mt-10 text-3xl border-b pb-1 dark:border-primary-100/10 contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400',
