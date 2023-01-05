@@ -1,28 +1,18 @@
----
-title: Plugin Page
-description: Check out this Spark plugin
----
+// ---
+// title: Plugin Page
+// description: Check out this Spark plugin
+// ---
 
-import { useSSG } from 'nextra/ssg';
 import Error from 'next/error';
-import { MDXRemote } from 'next-mdx-remote'
+import { MDXRemote } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 import { trpc } from '~/utils/trpc';
-import { mdxToHtml } from '~/utils/mdxToHtml'
 import Callout from '~/components/Callout';
-import { prisma } from '~/server/server/db/client'
 
-export const getServerSideProps = async ({ query }) => {
-  const plugin = await prisma.plugin.findFirst({ where: { id: query.id } });
-  const { html } = await mdxToHtml(plugin.description);
-  return { props: { ssg: { html } }}
-}
- 
 export const PluginPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data: plugin, status } = trpc.plugins.findById.useQuery(id);
-  const { html } = useSSG();
   if (status === 'error') {
     return (
       <Callout type="error">An error occured. Please refresh and try again.</Callout>
@@ -31,7 +21,7 @@ export const PluginPage = () => {
   if (status === 'loading') {
     return (
       <div className="flex items-center justify-center">
-        <div style={{ borderTopColor: 'transparent' }} className="w-8 h-8 border-4 border-gray-400 rounded-full animate-spin" />
+        <div className=" border-t-transparent w-8 h-8 border-4 border-gray-400 rounded-full animate-spin" />
         <h1 className="ml-2 font-extrabold text-lg">Loading Plugin...</h1>
       </div>
     );
@@ -41,12 +31,12 @@ export const PluginPage = () => {
   }
   return (
     <>
-      <div className='max-w-screen-lg mx-auto pt-4 pb-8 mb-16 border-b border-gray-400 border-opacity-20'>
-        <h1><span className='font-bold leading-tight lg:text-5xl'>{plugin.name}</span></h1>
+      <div className="max-w-screen-lg mx-auto pt-4 pb-8 mb-16 border-b border-gray-400 border-opacity-20">
+        <h1><span className="font-bold leading-tight lg:text-5xl">{plugin.data.name}</span></h1>
       </div>
-      <MDXRemote {...html} />
+      <MDXRemote {...plugin.html} />
     </>
-  )
-}
- 
+  );
+};
+
 export default PluginPage;

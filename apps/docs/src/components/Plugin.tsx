@@ -52,7 +52,7 @@ export function PluginShowcase() {
   if (status === 'loading') {
     return (
       <div className="flex items-center justify-center">
-        <div style={{ borderTopColor: 'transparent' }} className="w-8 h-8 border-4 border-gray-400 rounded-full animate-spin" />
+        <div className="border-t-transparent w-8 h-8 border-4 border-gray-400 rounded-full animate-spin" />
         <h1 className="ml-2 font-extrabold text-lg">Loading Plugins...</h1>
       </div>
     );

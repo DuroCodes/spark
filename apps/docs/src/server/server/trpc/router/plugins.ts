@@ -1,4 +1,9 @@
 import { z } from 'zod';
+import { serialize } from 'next-mdx-remote/serialize';
+import remarkGfm from 'remark-gfm';
+import rehypeAddClasses from 'rehype-add-classes';
+import rehypePrettyCode from 'rehype-pretty-code';
+import theme from '~/utils/theme.json';
 import { router, publicProcedure } from '../trpc';
 
 const pluginSchema = z.object({
@@ -10,6 +15,21 @@ const pluginSchema = z.object({
     image: z.string(),
   }),
 });
+
+const rehypePrettyCodeOptions = {
+  theme,
+  onVisitLine(node: any) {
+    if (node.children.length === 0) {
+      node.children = [{ type: 'text', value: ' ' }];
+    }
+  },
+  onVisitHighlightedLine(node: any) {
+    node.properties.className.push('highlighted');
+  },
+  onVisitHighlightedWord(node: any) {
+    node.properties.className = ['highlighted'];
+  },
+};
 
 export const pluginRouter = router({
   create: publicProcedure
@@ -23,7 +43,27 @@ export const pluginRouter = router({
 
   findById: publicProcedure
     .input(z.string())
-    .query(({ ctx, input }) => ctx.prisma.plugin.findFirst({ where: { id: input } })),
+    .query(async ({ ctx, input }) => {
+      const data = await ctx.prisma.plugin.findFirst({ where: { id: input } });
+
+      const html = await serialize(data.description, {
+        mdxOptions: {
+          format: 'md',
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [
+            [rehypePrettyCode, rehypePrettyCodeOptions],
+            [rehypeAddClasses, {
+              h1: 'mt-2 text-4xl font-bold tracking-tight',
+              h2: 'font-semibold tracking-tight mt-10 text-3xl border-b pb-1 dark:border-primary-100/10 contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400',
+              h3: 'font-semibold tracking-tight mt-8 text-2xl',
+            }],
+          ],
+          development: false,
+        },
+      });
+
+      return { data, html };
+    }),
 
   findAll: publicProcedure.query(({ ctx }) => ctx.prisma.plugin.findMany()),
 });
