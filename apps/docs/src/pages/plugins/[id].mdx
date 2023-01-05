@@ -13,7 +13,7 @@ import Callout from '~/components/Callout';
 import { prisma } from '~/server/server/db/client'
 
 export const getServerSideProps = async ({ query }) => {
-  const plugin = await prisma.plugin.findFirst({ where: { id: query.id } })
+  const plugin = await prisma.plugin.findFirst({ where: { id: query.id } });
   const { html } = await mdxToHtml(plugin.description);
   return { props: { ssg: { html } }}
 }
@@ -49,4 +49,4 @@ export const PluginPage = () => {
   )
 }
  
-<PluginPage />
+export default PluginPage;
