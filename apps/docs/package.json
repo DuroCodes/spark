@@ -15,7 +15,7 @@
   "author": "DuroCodes",
   "license": "MIT",
   "dependencies": {
-    "@heroicons/react": "1.0.6",
+    "@heroicons/react": "2.0.14",
     "@hookform/resolvers": "^2.9.10",
     "@leafac/rehype-shiki": "^2.2.1",
     "@prisma/client": "^4.7.1",
