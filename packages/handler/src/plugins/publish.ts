@@ -4,7 +4,7 @@ import {
   PermissionResolvable,
 } from 'discord.js';
 import { CommandType } from '../types/command';
-import { SlashCommandPlugin } from '../types/plugin';
+import { CommandPlugin } from '../types/plugin';
 
 const rawCommandType = {
   [CommandType.Slash]: ApplicationCommandType.ChatInput,
@@ -18,9 +18,8 @@ export interface PublishOptions {
   defaultMemberPermissions?: PermissionResolvable | null;
 }
 
-export function publish(opts?: PublishOptions): SlashCommandPlugin {
+export function publish(opts?: PublishOptions): CommandPlugin<CommandType.Slash> {
   return {
-    preprocess: true,
     name: 'Publish plugin',
     description: 'Manage & publish slash commands',
     async run({ controller, client, command }) {

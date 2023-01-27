@@ -7,11 +7,7 @@ export {
   TextCommand,
   CommandType,
 } from './types/command';
-export {
-  SlashCommandPlugin,
-  TextCommandPlugin,
-  Controller,
-} from './types/plugin';
+export { CommandPlugin, Controller, InitPlugin } from './types/plugin';
 export { EventOptions, EventRunner } from './types/event';
 export { Store } from './util/store';
 export { Plugins } from './util/plugins';

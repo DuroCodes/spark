@@ -1,5 +1,4 @@
-import { BaseCommand, CommandType, InputCommand } from '../types/command';
-import { SlashCommandPlugin, TextCommandPlugin } from '../types/plugin';
+import { BaseCommand, CommandType, Command } from '../types/command';
 
 /**
  * The event class. Use this class to create new commands in your bot.
@@ -43,17 +42,12 @@ export class SparkCommand implements BaseCommand {
   public description?: string;
 
   /**
-   * Plugins used by the command. Defaults to `[]`
-   */
-  public plugins?: TextCommandPlugin[] | SlashCommandPlugin[];
-
-  /**
    * The type of the command.
    * You can use the {@link CommandType} enum or the direct values. (`'slash'` or `'text'`)
    */
   public type!: CommandType;
 
-  constructor(options: InputCommand) {
+  constructor(options: Command) {
     Object.assign(this, options);
   }
 }

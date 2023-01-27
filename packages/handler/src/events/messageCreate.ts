@@ -12,8 +12,6 @@ async function textCommandHandler(
   try {
     if (command.plugins) {
       for await (const plugin of command.plugins) {
-        if (plugin.preprocess) continue;
-
         const { err } = await plugin.run({
           client: message.client,
           message,

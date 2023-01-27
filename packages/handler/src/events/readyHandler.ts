@@ -4,7 +4,13 @@ import { parse } from 'path';
 import { match } from 'ts-pattern';
 import glob from 'fast-glob';
 import { Controller } from '../types/plugin';
-import { Command, CommandType, DefinedCommand } from '../types/command';
+import {
+  Command,
+  CommandType,
+  SlashCommand,
+  TextCommand,
+} from '../types/command';
+import { Processed } from '../types/util';
 import { BaseEvent } from './baseEvent';
 import { Store } from '../util/store';
 import { importFile } from '../util/importFile';
@@ -37,8 +43,8 @@ function registerEvent(event: Event, client: Client): Result<void, void> {
     .otherwise(() => Err.EMPTY);
 }
 
-function registerCommand(command: DefinedCommand, client: Client): Result<void, void> {
-  return match<DefinedCommand>(command)
+function registerCommand(command: Processed<Command>, client: Client): Result<void, void> {
+  return match<Processed<Command>>(command)
     .with({ type: CommandType.Text }, (cmd) => {
       cmd.aliases?.forEach((a) => Store.TextCommands.aliases.set(a, cmd));
       Store.TextCommands.text.set(cmd.name, cmd);
@@ -50,12 +56,46 @@ function registerCommand(command: DefinedCommand, client: Client): Result<void, 
       client.logger.debug(`Registered slash command: ${cmd.name}.`);
       return Ok.EMPTY;
     })
+    .with({ type: CommandType.Both }, (cmd) => {
+      const sharedProps = {
+        name: cmd.name,
+        description: cmd.description,
+        plugins: cmd.plugins,
+        initPlugins: cmd.initPlugins,
+      };
+
+      const textCmd = {
+        type: CommandType.Text,
+        run: cmd.textRun,
+        aliases: cmd.aliases,
+        ...sharedProps,
+      };
+
+      const slashCmd = {
+        type: CommandType.Slash,
+        run: cmd.slashRun,
+        options: cmd.options,
+        ...sharedProps,
+      };
+
+      cmd.aliases?.forEach((a) => Store.TextCommands.aliases.set(a, textCmd as TextCommand));
+
+      Store.TextCommands.text.set(cmd.name, textCmd as TextCommand);
+
+      Store.ApplicationCommands[
+        ApplicationCommandType.ChatInput
+      ].set(cmd.name, slashCmd as SlashCommand);
+
+      client.logger.debug(`Registered both command: ${cmd.name}.`);
+
+      return Ok.EMPTY;
+    })
     .otherwise(() => Err.EMPTY);
 }
 
 function intoDefinedCommand(
   { path, command }: { path: string; command: Command; },
-): DefinedCommand {
+) {
   return {
     ...command,
     name: command?.name ?? parse(path).name,
@@ -63,31 +103,29 @@ function intoDefinedCommand(
   };
 }
 
-function processPlugins(
+async function processPlugins(
   { command, client, controller }: { command: Command; client: Client; controller: Controller; },
 ) {
-  if (command.type === CommandType.Slash) {
-    command.plugins?.forEach(async (plugin) => {
-      if (!plugin.preprocess) return;
+  if (command.initPlugins) {
+    if (command.type === CommandType.Slash) {
+      for await (const plugin of command.initPlugins) {
+        await plugin.run({
+          client,
+          controller,
+          command,
+        });
+      }
+    }
 
-      await plugin.run({
-        client,
-        controller,
-        command,
-      });
-    });
-  }
-
-  if (command.type === CommandType.Text) {
-    command.plugins?.forEach(async (plugin) => {
-      if (!plugin.preprocess) return;
-
-      await plugin.run({
-        client,
-        controller,
-        command,
-      });
-    });
+    if (command.type === CommandType.Text) {
+      for await (const plugin of command.initPlugins) {
+        await plugin.run({
+          client,
+          controller,
+          command,
+        });
+      }
+    }
   }
 }
 

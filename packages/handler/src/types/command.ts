@@ -1,62 +1,67 @@
 import {
   ApplicationCommandOptionData,
-  Awaitable,
   ChatInputCommandInteraction,
   Client,
   CommandInteractionOptionResolver,
   Message,
 } from 'discord.js';
-import { SlashCommandPlugin, TextCommandPlugin } from './plugin';
-import { DefinitelyDefined, Override } from './util';
+import {
+  AnyCommandPlugin,
+  AnyInitPlugin,
+  CommandPlugin,
+  InitPlugin,
+} from './plugin';
 
 export enum CommandType {
   Text = 'text',
   Slash = 'slash',
+  Both = 'both',
+}
+
+interface CommandOptionsDefs {
+  [CommandType.Slash]: {
+    client: Client;
+    interaction: ChatInputCommandInteraction;
+    args: CommandInteractionOptionResolver;
+  };
+
+  [CommandType.Text]: {
+    client: Client;
+    message: Message;
+    args: string[];
+  };
 }
 
 export interface BaseCommand {
   name?: string;
   description?: string;
-  type: CommandType | `${CommandType}`;
+  type: CommandType;
 }
 
-export type TextCommand = Override<
-  BaseCommand,
-  {
-    type: CommandType.Text | `${CommandType.Text}`;
-    aliases?: string[];
-    plugins?: TextCommandPlugin[];
-    run: (options: {
-      client: Client;
-      message: Message;
-      args: string[];
-    }) => Awaitable<void | unknown>;
-  }
->;
+export interface TextCommand extends BaseCommand {
+  type: CommandType.Text;
+  aliases?: string[];
+  plugins?: (CommandPlugin<CommandType.Text> | CommandPlugin<CommandType.Both>)[];
+  initPlugins?: (InitPlugin<CommandType.Text> | InitPlugin<CommandType.Both>)[];
+  run: (options: CommandOptionsDefs[CommandType.Text]) => unknown;
+}
 
-export type SlashCommand = Override<
-  BaseCommand,
-  {
-    type: CommandType.Slash | `${CommandType.Slash}`;
-    options?: ApplicationCommandOptionData[];
-    plugins?: SlashCommandPlugin[];
-    run: (options: {
-      client: Client;
-      interaction: ChatInputCommandInteraction;
-      args: CommandInteractionOptionResolver;
-    }) => Awaitable<void | unknown>;
-  }
->;
+export interface SlashCommand extends BaseCommand {
+  type: CommandType.Slash;
+  options?: ApplicationCommandOptionData;
+  plugins?: (CommandPlugin<CommandType.Slash> | CommandPlugin<CommandType.Both>)[];
+  initPlugins?: (InitPlugin<CommandType.Slash> | CommandPlugin<CommandType.Both>)[];
+  run: (options: CommandOptionsDefs[CommandType.Slash]) => unknown;
+}
 
-export type CommandDefs = {
-  [CommandType.Text]: TextCommand;
-  [CommandType.Slash]: SlashCommand;
-};
+export interface BothCommand extends BaseCommand {
+  type: CommandType.Both;
+  options?: ApplicationCommandOptionData;
+  aliases?: string[];
+  plugins?: AnyCommandPlugin[];
+  initPlugins?: AnyInitPlugin[];
+  textRun: (options: CommandOptionsDefs[CommandType.Text]) => unknown;
+  slashRun: (options: CommandOptionsDefs[CommandType.Slash]) => unknown;
+}
 
-export type Command = TextCommand | SlashCommand;
-
-export type InputCommand = {
-  [T in CommandType]: CommandDefs[T]
-}[CommandType];
-
-export type DefinedCommand = DefinitelyDefined<Command, 'name' | 'description'>;
+export type Command = TextCommand | SlashCommand | BothCommand;

@@ -5,8 +5,12 @@ import {
   Message,
 } from 'discord.js';
 import { Err, Ok, Result } from 'ts-results-es';
-import { SlashCommand, TextCommand } from './command';
-import { Override } from './util';
+import {
+  Command,
+  CommandType,
+  SlashCommand,
+  TextCommand,
+} from './command';
 
 export interface Controller {
   next: () => Ok<void>;
@@ -20,63 +24,70 @@ export interface BasePlugin {
   run: () => Awaitable<Result<void, void>>;
 }
 
-export type PreprocessTextCommandPlugin = Override<
-  BasePlugin,
-  {
-    preprocess: true,
-    run: (options: {
-      client: Client,
-      controller: Controller;
-      command: TextCommand;
-    }) => Awaitable<Result<void, void>>;
-  }
->;
+interface CommandPluginOptionsDefs {
+  [CommandType.Both]: {
+    client: Client;
+    command: Command;
+    controller: Controller;
+    message?: Message;
+    interaction?: ChatInputCommandInteraction;
+  };
 
-export type PreprocessSlashCommandPlugin = Override<
-  BasePlugin,
-  {
-    preprocess: true,
-    run: (options: {
-      client: Client,
-      controller: Controller;
-      command: SlashCommand;
-    }) => Awaitable<Result<void, void>>;
-  }
->;
+  [CommandType.Slash]: {
+    client: Client;
+    controller: Controller;
+    command: SlashCommand;
+    interaction: ChatInputCommandInteraction;
+  };
 
-export type NonPreprocessTextCommandPlugin = Override<
-  BasePlugin,
-  {
-    preprocess: false,
-    run: (options: {
-      client: Client;
-      message: Message;
-      controller: Controller;
-      command: TextCommand;
-    }) => Awaitable<Result<void, void>>;
-  }
->;
+  [CommandType.Text]: {
+    client: Client;
+    controller: Controller;
+    command: TextCommand;
+    message: Message;
+  };
+}
 
-export type NonPreprocessSlashCommandPlugin = Override<
-  BasePlugin,
-  {
-    preprocess: false,
-    run: (options: {
-      client: Client;
-      interaction: ChatInputCommandInteraction;
-      controller: Controller;
-      command: SlashCommand;
-    }) => Awaitable<Result<void, void>>;
-  }
->;
+interface InitPluginOptionsDefs {
+  [CommandType.Both]: {
+    client: Client;
+    controller: Controller;
+    command: Command;
+  };
 
-export type NonPreprocessCommandPlugin =
-  NonPreprocessTextCommandPlugin | NonPreprocessSlashCommandPlugin;
+  [CommandType.Slash]: {
+    client: Client;
+    controller: Controller;
+    command: SlashCommand;
+  };
 
-export type PreprocessCommandPlugin =
-  PreprocessTextCommandPlugin | PreprocessSlashCommandPlugin;
+  [CommandType.Text]: {
+    client: Client;
+    controller: Controller;
+    command: TextCommand;
+  };
+}
 
-export type SlashCommandPlugin = NonPreprocessSlashCommandPlugin | PreprocessSlashCommandPlugin;
-export type TextCommandPlugin = NonPreprocessTextCommandPlugin | PreprocessTextCommandPlugin;
+export interface CommandPlugin<T extends CommandType> {
+  name?: string;
+  description?: string;
+  run: (options: CommandPluginOptionsDefs[T]) => Awaitable<Result<void, void>>;
+}
 
-export type CommandPlugin = PreprocessCommandPlugin | NonPreprocessCommandPlugin;
+export interface InitPlugin<T extends CommandType> {
+  name?: string;
+  description?: string;
+  run: (options: InitPluginOptionsDefs[T]) => Awaitable<Result<void, void>>;
+}
+
+export type AnyCommandPlugin =
+  | CommandPlugin<CommandType.Both>
+  | CommandPlugin<CommandType.Slash>
+  | CommandPlugin<CommandType.Text>;
+
+export type AnyInitPlugin =
+  | InitPlugin<CommandType.Both>
+  | InitPlugin<CommandType.Slash>
+  | InitPlugin<CommandType.Text>;
+
+export type AnyPlugin = AnyInitPlugin | AnyCommandPlugin;

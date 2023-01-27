@@ -17,8 +17,6 @@ async function slashCommandHandler(
   try {
     if (command.plugins) {
       for await (const plugin of command.plugins) {
-        if (plugin.preprocess) continue;
-
         const { err } = await plugin.run({
           client: interaction.client,
           interaction,
