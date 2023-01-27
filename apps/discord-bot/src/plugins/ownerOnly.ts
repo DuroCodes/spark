@@ -1,41 +1,35 @@
-import { SlashCommandPlugin, TextCommandPlugin } from '@spark.ts/handler';
+import { CommandPlugin, CommandType } from '@spark.ts/handler';
 
 function mapUsers(ids: string[]) {
-  const userMention = (s: string) => `<@!${s}>`;
-  return ids.map((id) => `\` - \` ${userMention(id)}`).join('\n');
+  const mention = (s: string) => `<@!${s}>`;
+  return ids.map((id) => `\` - \` ${mention(id)}`).join('\n');
 }
 
-export function ownerOnlySlash(ownerIds: string[]): SlashCommandPlugin {
+export function ownerOnly(ownerIds: string[]): CommandPlugin<CommandType.Both> {
   return {
-    preprocess: false,
-    description: 'Only allows the owner to run the command.',
-    async run({ interaction, controller }) {
-      if (ownerIds.includes(interaction.user.id)) {
-        return controller.next();
+    name: 'Owner Only',
+    description: 'Only allows the owner(s) to run the command.',
+    async run({
+      controller, command, message, interaction,
+    }) {
+      if (command.type === CommandType.Text) {
+        if (ownerIds.includes(message!.author.id)) {
+          return controller.next();
+        }
+
+        await message!.reply(`Only these people can run the command!\n${mapUsers(ownerIds)}`);
       }
 
-      await interaction.reply({
-        content: `Only these people can run this!\n${mapUsers(ownerIds)}`,
-        ephemeral: true,
-      });
+      if (command.type === CommandType.Slash) {
+        if (ownerIds.includes(interaction!.user.id)) {
+          return controller.next();
+        }
 
-      return controller.stop();
-    },
-  };
-}
-
-export function ownerOnlyText(ownerIds: string[]): TextCommandPlugin {
-  return {
-    preprocess: false,
-    description: 'Only allows the owner to run the command.',
-    async run({ message, controller }) {
-      if (ownerIds.includes(message.author.id)) {
-        return controller.next();
+        await interaction?.reply({
+          content: `Only these people can run the command!\n${mapUsers(ownerIds)}`,
+          ephemeral: true,
+        });
       }
-
-      await message.reply({
-        content: `Only these people can run this!\n${mapUsers(ownerIds)}`,
-      });
 
       return controller.stop();
     },
