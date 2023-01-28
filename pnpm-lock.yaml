@@ -48,6 +48,7 @@ importers:
       eslint: 8.10.0
       eslint-config-next: 12.3.1
       eslint-config-prettier: 8.5.0
+      fast-glob: ^3.2.12
       gray-matter: 4.0.3
       next: 12.3.1
       next-auth: ^4.18.6
@@ -82,6 +83,7 @@ importers:
       '@trpc/react-query': 10.6.0_p5mdqjeqz2aqoe55rnxxhkrgoa
       '@trpc/server': 10.6.0
       copy-to-clipboard: 3.3.2
+      fast-glob: 3.2.12
       next: 12.3.1_7zkbjz6d46tpcbbta4lk5n6n6i
       next-auth: 4.18.6_dty4et2pnba4zo7o4cegg6bk2e
       next-mdx-remote: 4.2.0_sfoxds7t5ydpegc3knd667wn6m
@@ -160,7 +162,7 @@ importers:
   packages/handler:
     specifiers:
       '@spark.ts/logger': workspace:^
-      discord.js: ^14.7.0
+      discord.js: ^14.7.1
       eslint-config-custom: workspace:*
       fast-glob: ^3.2.12
       ts-pattern: ^4.0.6
@@ -169,7 +171,7 @@ importers:
       typescript: 4.8.4
     dependencies:
       '@spark.ts/logger': link:../logger
-      discord.js: 14.7.0
+      discord.js: 14.7.1
       fast-glob: 3.2.12
       ts-pattern: 4.0.6
       ts-results-es: 3.5.0
@@ -2492,8 +2494,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /discord.js/14.7.0:
-    resolution: {integrity: sha512-CR2JAoqR+82D7mfMZ7toPAqdIk2sMF8wgTc8yDGPPMHzJknIKtkEPtzWFhBYGMZUkK+M4POw08ngBWqK2A4RMg==}
+  /discord.js/14.7.1:
+    resolution: {integrity: sha512-1FECvqJJjjeYcjSm0IGMnPxLqja/pmG1B0W2l3lUY2Gi4KXiyTeQmU1IxWcbXHn2k+ytP587mMWqva2IA87EbA==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@discordjs/builders': 1.4.0

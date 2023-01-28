@@ -43,7 +43,7 @@ export class SparkCommand implements BaseCommand {
 
   /**
    * The type of the command.
-   * You can use the {@link CommandType} enum or the direct values. (`'slash'` or `'text'`)
+   * You can use the `CommandType` enum or the direct values. (`'slash'` or `'text'`)
    */
   public type!: CommandType;
 

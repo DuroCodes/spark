@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@spark.ts/logger": "workspace:^",
-    "discord.js": "^14.7.0",
+    "discord.js": "^14.7.1",
     "fast-glob": "^3.2.12",
     "ts-pattern": "^4.0.6",
     "ts-results-es": "^3.5.0"
