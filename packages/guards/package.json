@@ -1,7 +1,7 @@
 {
   "name": "@spark.ts/guards",
   "version": "1.0.0",
-  "description": "A plugin for @spark.ts/handler which adds coditions to commands that have to be passed in order for the command to run.",
+  "description": "A plugin for @spark.ts/handler which adds conditions to commands that have to be passed in order for the command to run.",
   "main": "dist/index.js",
   "scripts": {
     "watch": "tsup --watch --dts",
