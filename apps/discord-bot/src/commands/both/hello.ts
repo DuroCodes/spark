@@ -2,7 +2,7 @@ import { CommandType, Plugins, SparkCommand } from '@spark.ts/handler';
 
 export default new SparkCommand({
   type: CommandType.Both,
-  plugins: [Plugins.Publish()],
+  initPlugins: [Plugins.Publish()],
   aliases: ['hi'],
   slashRun({ interaction }) {
     interaction.reply('Hello!');
