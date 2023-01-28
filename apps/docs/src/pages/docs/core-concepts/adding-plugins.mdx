@@ -9,44 +9,64 @@ import Callout from '~/components/Callout';
 
 Plugins are a way to reuse code between multiple different commands, without writing the same code twice.
 
+<Callout type="info">Plugins were heavily inspired by [`Sern`](https://sern.dev)'s system. Check them out!</Callout>
+
 It's recommended that you have a directory for plugins, and you can use that directory to import it to your commands.
 
 For example, you could make an `Owner Only` plugin like this:
 
 ```ts filename="src/plugins/ownerOnly.ts" copy
-// This is an example plugin for a 'owner only' slash command plugin.
-// For a text command plugin, you'd just have to use message instead of interaction.
+// This is an example plugin for a 'owner only' command plugin.
 
-import { SlashCommandPlugin } from '@spark.ts/handler';
+// Import needed types from Spark
+import { CommandPlugin, CommandType } from '@spark.ts/handler';
 
-export function ownerOnly(ownerIds: string[]): SlashCommandPlugin {
+// Util function to mention users with their ids
+function mapUsers(ids: string[]) {
+  const mention = (s: string) => `<@!${s}>`;
+  return ids.map((id) => `\` - \` ${mention(id)}`).join('\n');
+}
+
+// The params in this function will be required when you use the plugin.
+export function ownerOnly(ownerIds: string[]): CommandPlugin<CommandType.Both> {
   return {
-    // Whether the event should run while the command gets registed & not when the command is executed.
-    preprocess: false,
+    name: 'Owner Only',
+    description: 'Only allows the owner(s) to run the command.',
+    async run({
+      controller, command, message, interaction,
+    }) {
+      // Checks if the command is a text command.
+      if (command.type === CommandType.Text) {
+        // You can use the `!` operator safety as message will be inside of this block.
+        if (ownerIds.includes(message!.author.id)) {
+          // Continues with execution, will run other plugins.
+          // If all plugins are successful, the command is ran.
+          return controller.next();
+        }
 
-    // Name & description of the plugin, this is mainly for documentation.
-    name: 'Owner only plugin',
-    description: 'Only allows the owner to run the command.',
-
-    // Logic for the plugin.
-    async run({ interaction, controller }) {
-      if (ownerIds.includes(interaction.user.id)) {
-        return controller.next();
+        await message!.reply(`Only these people can run the command!\n${mapUsers(ownerIds)}`);
       }
 
-      await interaction.reply({
-        content: `Only these people can run this!\n${mapUsers(ownerIds)}`,
-        ephemeral: true,
-      });
+      if (command.type === CommandType.Slash) {
+        if (ownerIds.includes(interaction!.user.id)) {
+          return controller.next();
+        }
 
+        await interaction!.reply({
+          content: `Only these people can run the command!\n${mapUsers(ownerIds)}`,
+          ephemeral: true,
+        });
+      }
+
+      // Stops the controller, this stops the command & other plugins from being ran.
       return controller.stop();
     },
   };
 }
 ```
 
-<Callout>
-  This plugin only works for a slash command. Notice the return signature, `SlashCommandPlugin`.
+<Callout type="info">
+  This plugin works for both text commands & slash commands because of the type used in `CommandPlugin`.
 </Callout>
 
 ## Command Integration
@@ -57,8 +77,7 @@ To add a plugin to your command, just import the function and then add it to the
 
 ```ts filename="src/commands/ownerOnly.ts" {6} copy
 import { SparkCommand } from '@spark.ts/handler';
-// This import is using a path alias, `~` for the `src` directory.
-import { ownerOnly } from '~/plugins/ownerOnly.js';
+import { ownerOnly } from '../../plugins/ownerOnly.js';
 
 export default new SparkCommand({
   plugins: [ownerOnly('<your user id would go here>')],
@@ -69,22 +88,37 @@ export default new SparkCommand({
 });
 ```
 
+## Init Plugins
+
+Init plugins are plugins that run once a command is initialized/loaded.
+
+The pattern of creating these plugins are very similar to creating any other plugin, you just have to use the `InitPlugin` type instead of `CommandPlugin`.
+
+We can create a basic `InitPlugin`, one that logs `${command.name}` whenever a command is loaded.
+
+```ts filename="src/plugins/log.ts" copy
+// Import types from Spark
+import { CommandType, InitPlugin } from '@spark.ts/handler';
+
+export function logPlugin(): InitPlugin<CommandType.Both> {
+  return {
+    name: 'Log Plugin',
+    description: 'Logs the plugin name with a success log',
+    run({ client, command, controller }) {
+      // Logs that the command was loaded
+      client.logger.success(`${command.name} was successfully loaded.`);
+
+      // Continues with execution
+      return controller.next();
+    },
+  };
+}
+```
+
 ## Controller
 
-The controller is what controls your flow of your code. If you do `controller.stop()` in your command, it'll stop the execution of your command.
+The controller is what controls your flow of your code. If you do `controller.stop()` in your command, it stops the execution of your command.
 
-Please make sure to return this upon an error in your plugin. For example, if the user is not permitted to use the command, you return `controller.stop()` in your plugin.
+Please make sure to return this upon an error in your plugin. For example, if the user is not permitted to use the command, return `controller.stop()` in your plugin.
 
-If you have a success in your plugin, return `controller.next()`. This will continue on with the command, and other plugins.
-
-
-## Pre-Process Plugins
-
-Plugins that run while your command get registered are called **pre-process plugins.**
-
-To create a pre-process plugin, just add the `preprocess: true` option to your plugin function's return object.
-
-<Callout>
-  Pre-process plugins run while the command is registered.
-  This means pre-process plugins don't have access to `interaction` or `message`.
-</Callout>
+If you have a success in your plugin, return `controller.next()`. This will execute other plugins, if available, and then the command.
