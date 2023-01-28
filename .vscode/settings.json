@@ -4,6 +4,7 @@
     "docs",
     "handler",
     "logger",
+    "guards",
     "*",
   ],
 }
