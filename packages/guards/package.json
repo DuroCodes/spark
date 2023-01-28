@@ -1,6 +1,6 @@
 {
   "name": "@spark.ts/guards",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A plugin for @spark.ts/handler which adds conditions to commands that have to be passed in order for the command to run.",
   "main": "dist/index.js",
   "scripts": {
