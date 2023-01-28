@@ -1,0 +1,13 @@
+## SlashCommand
+
+| Property    | Type                                                                                                                                                        | Value | Description                                                         |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | ------------------------------------------------------------------- |
+| description | string                                                                                                                                                      | N/A   | -                                                                   |
+| initPlugins | Array\<CommandPlugin\<Both> \| InitPlugin\<Slash>>                                                                                                          | N/A   | Plugins that will be ran upon the command being initialized/loaded. |
+| name        | string                                                                                                                                                      | N/A   | -                                                                   |
+| options     | ApplicationCommandOptionData                                                                                                                                | N/A   | -                                                                   |
+| plugins     | Array\<CommandPlugin\<Both> \| CommandPlugin\<Slash>>                                                                                                       | N/A   | Plugins that will be ran upon the command being used.               |
+| run         | (options: \{ args: CommandInteractionOptionResolver\<CacheType>,client: Client\<boolean>,interaction: ChatInputCommandInteraction\<CacheType> }) => unknown | N/A   | -                                                                   |
+| type        | Slash                                                                                                                                                       | N/A   | -                                                                   |
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/types/command.ts#L62)

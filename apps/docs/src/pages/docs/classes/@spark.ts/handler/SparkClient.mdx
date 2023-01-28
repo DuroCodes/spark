@@ -1,0 +1,437 @@
+## SparkClient extends Client\<Ready>
+
+```typescript
+new SparkClient(options)
+```
+
+| Parameter | Type               | Optional | Description |
+| --------- | ------------------ | -------- | ----------- |
+| options   | SparkClientOptions | ❌       | -           |
+
+## Properties
+
+### public application: If\<Ready, ClientApplication, null>
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L899`
+
+### public channels: ChannelManager
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L900`
+
+### public directories: Readonly\<SparkClientDirectories>
+
+The directories used for the handler.
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/structures/sparkClient.ts#L93)
+
+### public guilds: GuildManager
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L902`
+
+### private logLevel: LogLevel
+
+The log level used by the logger.
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/structures/sparkClient.ts#L71)
+
+### public logger: Logger
+
+The logger to be used by the handler.
+Logger implemented by
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/structures/sparkClient.ts#L77)
+
+### public options: Omit\<ClientOptions, 'intents'> & \{ intents: IntentsBitField }
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L903`
+
+### public prefix: string
+
+The prefix used for text commands. Defaults to '!'
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/structures/sparkClient.ts#L99)
+
+### public readyTimestamp: If\<Ready, number, null>
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L905`
+
+### public rest: REST
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L476`
+
+### public shard: null \| ShardClientUtil
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L907`
+
+### public sweepers: Sweepers
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L906`
+
+### public token: If\<Ready, string, null \| string>
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L908`
+
+### public user: If\<Ready, ClientUser, null>
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L910`
+
+### public users: UserManager
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L911`
+
+### public voice: ClientVoiceManager
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L912`
+
+### public ws: WebSocketManager
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L913`
+
+### public static captureRejectionSymbol: (typeof captureRejectionSymbol)
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L328`
+
+### public static captureRejections: boolean
+
+Sets or gets the default captureRejection value for all emitters.
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L333`
+
+### public static defaultMaxListeners: number
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L334`
+
+### public static errorMonitor: (typeof errorMonitor)
+
+This symbol shall be used to install a listener for only monitoring
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L327`
+
+### public \_censoredToken: null \| string
+
+### public emojis: BaseGuildEmojiManager
+
+### public readyAt: If\<Ready, Date, null>
+
+### public uptime: If\<Ready, number, null>
+
+## Methods
+
+### public addListener(eventName, listener): SparkClient\<Ready>
+
+Alias for
+
+| Parameter | Type                        | Optional | Description |
+| --------- | --------------------------- | -------- | ----------- |
+| eventName | string \| symbol            | ❌       | -           |
+| listener  | (args: Array\<any>) => void | ❌       | -           |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L354`
+
+### public destroy(): void
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L914`
+
+### public emit(event, args): boolean
+
+| Parameter | Type             | Optional | Description |
+| --------- | ---------------- | -------- | ----------- |
+| event     | K                | ❌       | -           |
+| args      | ClientEvents\[K] | ❌       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L940`
+
+### public eventNames(): Array\<string \| symbol>
+
+Returns an array listing the events for which the emitter has registered
+listeners. The values in the array are strings or
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L669`
+
+### public fetchGuildPreview(guild): Promise\<GuildPreview>
+
+| Parameter | Type            | Optional | Description |
+| --------- | --------------- | -------- | ----------- |
+| guild     | GuildResolvable | ❌       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L915`
+
+### public fetchGuildTemplate(template): Promise\<GuildTemplate>
+
+| Parameter | Type   | Optional | Description |
+| --------- | ------ | -------- | ----------- |
+| template  | string | ❌       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L917`
+
+### public fetchGuildWidget(guild): Promise\<Widget>
+
+| Parameter | Type            | Optional | Description |
+| --------- | --------------- | -------- | ----------- |
+| guild     | GuildResolvable | ❌       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L922`
+
+### public fetchInvite(invite, options?): Promise\<Invite>
+
+| Parameter | Type                     | Optional | Description |
+| --------- | ------------------------ | -------- | ----------- |
+| invite    | string                   | ❌       | -           |
+| options   | ClientFetchInviteOptions | ✅       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L916`
+
+### public fetchPremiumStickerPacks(): Promise\<Collection\<string, StickerPack>>
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L920`
+
+### public fetchSticker(id): Promise\<Sticker>
+
+| Parameter | Type   | Optional | Description |
+| --------- | ------ | -------- | ----------- |
+| id        | string | ❌       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L919`
+
+### public fetchVoiceRegions(): Promise\<Collection\<string, VoiceRegion>>
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L918`
+
+### public fetchWebhook(id, token?): Promise\<Webhook>
+
+| Parameter | Type   | Optional | Description |
+| --------- | ------ | -------- | ----------- |
+| id        | string | ❌       | -           |
+| token     | string | ✅       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L921`
+
+### public generateInvite(options?): string
+
+| Parameter | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| options   | InviteGenerationOptions | ✅       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L923`
+
+### public getMaxListeners(): number
+
+Returns the current max listener value for the
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L526`
+
+### public isReady(): this is Client\<true>
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L925`
+
+### public listenerCount(eventName): number
+
+Returns the number of listeners listening to the event named
+
+| Parameter | Type             | Optional | Description                              |
+| --------- | ---------------- | -------- | ---------------------------------------- |
+| eventName | string \| symbol | ❌       | The name of the event being listened for |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L616`
+
+### public listeners(eventName): Array\<Function>
+
+Returns a copy of the array of listeners for the event named
+
+| Parameter | Type             | Optional | Description |
+| --------- | ---------------- | -------- | ----------- |
+| eventName | string \| symbol | ❌       | -           |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L539`
+
+### public login(token): Promise\<string>
+
+Registers the handler and logs into the bot.
+Usage:
+
+| Parameter | Type   | Optional | Description |
+| --------- | ------ | -------- | ----------- |
+| token     | string | ❌       | -           |
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/structures/sparkClient.ts#L120)
+
+### public off(event, listener): SparkClient\<Ready>
+
+| Parameter | Type                                         | Optional | Description |
+| --------- | -------------------------------------------- | -------- | ----------- |
+| event     | K                                            | ❌       | -           |
+| listener  | (args: ClientEvents\[K]) => Awaitable\<void> | ❌       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L943`
+
+### public on(event, listener): SparkClient\<Ready>
+
+| Parameter | Type                                         | Optional | Description |
+| --------- | -------------------------------------------- | -------- | ----------- |
+| event     | K                                            | ❌       | -           |
+| listener  | (args: ClientEvents\[K]) => Awaitable\<void> | ❌       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L928`
+
+### public once(event, listener): SparkClient\<Ready>
+
+| Parameter | Type                                         | Optional | Description |
+| --------- | -------------------------------------------- | -------- | ----------- |
+| event     | K                                            | ❌       | -           |
+| listener  | (args: ClientEvents\[K]) => Awaitable\<void> | ❌       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L934`
+
+### public prependListener(eventName, listener): SparkClient\<Ready>
+
+Adds the
+
+| Parameter | Type                        | Optional | Description            |
+| --------- | --------------------------- | -------- | ---------------------- |
+| eventName | string \| symbol            | ❌       | The name of the event. |
+| listener  | (args: Array\<any>) => void | ❌       | The callback function  |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L634`
+
+### public prependOnceListener(eventName, listener): SparkClient\<Ready>
+
+Adds a **one-time**
+
+| Parameter | Type                        | Optional | Description            |
+| --------- | --------------------------- | -------- | ---------------------- |
+| eventName | string \| symbol            | ❌       | The name of the event. |
+| listener  | (args: Array\<any>) => void | ❌       | The callback function  |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L650`
+
+### public rawListeners(eventName): Array\<Function>
+
+Returns a copy of the array of listeners for the event named
+
+| Parameter | Type             | Optional | Description |
+| --------- | ---------------- | -------- | ----------- |
+| eventName | string \| symbol | ❌       | -           |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L569`
+
+### public removeAllListeners(event?): SparkClient\<Ready>
+
+| Parameter | Type | Optional | Description |
+| --------- | ---- | -------- | ----------- |
+| event     | K    | ✅       | -           |
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L949`
+
+### public removeListener(eventName, listener): SparkClient\<Ready>
+
+Removes the specified
+
+| Parameter | Type                        | Optional | Description |
+| --------- | --------------------------- | -------- | ----------- |
+| eventName | string \| symbol            | ❌       | -           |
+| listener  | (args: Array\<any>) => void | ❌       | -           |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L494`
+
+### public setMaxListeners(n): SparkClient\<Ready>
+
+By default
+
+| Parameter | Type   | Optional | Description |
+| --------- | ------ | -------- | ----------- |
+| n         | number | ❌       | -           |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L520`
+
+### public toJSON(): unknown
+
+- Source: `Programming/TypeScript/spark/node_modules/.pnpm/discord.js@14.7.1/node_modules/discord.js/typings/index.d.ts#L926`
+
+### public static getEventListeners(emitter, name): Array\<Function>
+
+Returns a copy of the array of listeners for the event named
+
+| Parameter | Type                             | Optional | Description |
+| --------- | -------------------------------- | -------- | ----------- |
+| emitter   | EventEmitter \| \_DOMEventTarget | ❌       | -           |
+| name      | string \| symbol                 | ❌       | -           |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L299`
+
+### public static listenerCount(emitter, eventName): number
+
+A class method that returns the number of listeners for the given
+
+- **⚠️ Deprecated**
+
+| Parameter | Type             | Optional | Description          |
+| --------- | ---------------- | -------- | -------------------- |
+| emitter   | EventEmitter     | ❌       | The emitter to query |
+| eventName | string \| symbol | ❌       | The event name       |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L271`
+
+### public static on(emitter, eventName, options?): AsyncIterableIterator\<any>
+
+```js
+const { on, EventEmitter } = require('events');
+
+(async () => {
+const ee = new EventEmitter();
+
+// Emit later on
+process.nextTick(() => {
+ee.emit('foo', 'bar');
+ee.emit('foo', 42);
+});
+
+for await (const event of on(ee, 'foo')) {
+// The execution of this inner block is synchronous and it
+// processes one event at a time (even with await). Do not use
+// if concurrent execution is required.
+console.log(event); // prints ['bar'] [42]
+}
+// Unreachable here
+})();
+```
+
+| Parameter | Type                      | Optional | Description                              |
+| --------- | ------------------------- | -------- | ---------------------------------------- |
+| emitter   | EventEmitter              | ❌       | -                                        |
+| eventName | string                    | ❌       | The name of the event being listened for |
+| options   | StaticEventEmitterOptions | ✅       | -                                        |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L254`
+
+### public static once(emitter, eventName, options?): Promise\<Array\<any>>
+
+Creates a
+
+| Parameter | Type                      | Optional | Description |
+| --------- | ------------------------- | -------- | ----------- |
+| emitter   | \_NodeEventTarget         | ❌       | -           |
+| eventName | string \| symbol          | ❌       | -           |
+| options   | StaticEventEmitterOptions | ✅       | -           |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L194`
+
+### public static setMaxListeners(n?, eventTargets): void
+
+```js
+const {
+setMaxListeners,
+EventEmitter
+} = require('events');
+
+const target = new EventTarget();
+const emitter = new EventEmitter();
+
+setMaxListeners(5, target, emitter);
+```
+
+| Parameter    | Type                                     | Optional | Description                                                |
+| ------------ | ---------------------------------------- | -------- | ---------------------------------------------------------- |
+| n            | number                                   | ✅       | A non-negative number. The maximum number of listeners per |
+| eventTargets | Array\<EventEmitter \| \_DOMEventTarget> | ❌       | -                                                          |
+
+- Source: `node_modules/@types/node/ts4.8/events.d.ts#L317`

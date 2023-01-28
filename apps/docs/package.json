@@ -10,7 +10,7 @@
     "lint": "next lint",
     "vercel-build": "prisma generate && next build",
     "prisma:generate": "prisma generate",
-    "docgen": "node src/utils/docgen.mjs"
+    "docgen": "rm -rf src/pages/docs && node src/utils/docgen.mjs && node src/utils/docgen.mjs"
   },
   "author": "DuroCodes",
   "license": "MIT",
@@ -26,6 +26,7 @@
     "@trpc/react-query": "^10.6.0",
     "@trpc/server": "^10.6.0",
     "copy-to-clipboard": "3.3.2",
+    "fast-glob": "^3.2.12",
     "next": "12.3.1",
     "next-auth": "^4.18.6",
     "next-mdx-remote": "^4.2.0",

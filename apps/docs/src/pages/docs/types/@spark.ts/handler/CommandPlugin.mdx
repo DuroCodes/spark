@@ -1,0 +1,12 @@
+## CommandPlugin
+
+Represents a plugin that is ran upon the command being used.
+Good for guards, reusability.
+
+| Property    | Type                                                                       | Value | Description |
+| ----------- | -------------------------------------------------------------------------- | ----- | ----------- |
+| description | string                                                                     | N/A   | -           |
+| name        | string                                                                     | N/A   | -           |
+| run         | (options: CommandPluginOptionsDefs\[T]) => Awaitable\<Result\<void, void>> | N/A   | -           |
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/types/plugin.ts#L87)

@@ -1,0 +1,10 @@
+## Controller
+
+Represents the controller object
+
+| Property | Type                                | Value | Description                                          |
+| -------- | ----------------------------------- | ----- | ---------------------------------------------------- |
+| next     | (...args: unknown\[]) => Ok\<void>  | N/A   | Continues plugin execution, runs the next plugin.    |
+| stop     | (...args: unknown\[]) => Err\<void> | N/A   | Stops plugin execution, doesn't run the next plugin. |
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/types/plugin.ts#L19)

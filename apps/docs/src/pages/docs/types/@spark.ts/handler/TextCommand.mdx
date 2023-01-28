@@ -1,0 +1,16 @@
+## TextCommand
+
+A text command. Ran with a prefix, and can have aliases.
+
+| Property                                                                  | Type                                                                                                | Value | Description                                                         |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ----- | ------------------------------------------------------------------- |
+| aliases                                                                   | Array\<string>                                                                                      | N/A   | Aliases for the command.                                            |
+| The command will be ran if any of these aliases are used with the prefix. |
+| description                                                               | string                                                                                              | N/A   | -                                                                   |
+| initPlugins                                                               | Array\<InitPlugin\<Both> \| InitPlugin\<Text>>                                                      | N/A   | Plugins that will be ran upon the command being initialized/loaded. |
+| name                                                                      | string                                                                                              | N/A   | -                                                                   |
+| plugins                                                                   | Array\<CommandPlugin\<Both> \| CommandPlugin\<Text>>                                                | N/A   | Plugins that will be ran upon the command being used.               |
+| run                                                                       | (options: \{ args: Array\<string>,client: Client\<boolean>,message: Message\<boolean> }) => unknown | N/A   | -                                                                   |
+| type                                                                      | Text                                                                                                | N/A   | -                                                                   |
+
+- [Source](https://github.com/DuroCodes/spark/blob/d7098ec/packages/handler/src/types/command.ts#L44)

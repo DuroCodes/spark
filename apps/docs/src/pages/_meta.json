@@ -12,12 +12,13 @@
       "toc": true
     }
   },
-  "docs": "Docs & Guide",
+  "guide": "Guide",
   "blog": {
     "title": "Blog",
     "theme": {
       "typesetting": "article"
     }
   },
+  "docs": "API Docs",
   "plugins": "Plugins"
 }

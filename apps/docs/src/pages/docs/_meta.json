@@ -1,9 +1,4 @@
 {
-  "index": {
-    "title": "Quickstart"
-  },
-  "api": "API",
-  "getting-started": "Getting Started",
-  "core-concepts": "Core Concepts",
-  "faq": "FAQ"
+  "classes": "Classes",
+  "types": "Types"
 }

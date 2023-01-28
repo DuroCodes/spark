@@ -63,7 +63,7 @@ export default function NewPlugin() {
         <h1><span className="font-bold leading-tight lg:text-5xl">New Plugin</span></h1>
         <div className="text-center text-gray-500 dark:text-gray-400">
           <p>Create a plugin for the Spark community.</p>
-          <Link href="/docs/core-concepts/publishing-plugins">Click here</Link> for a guide on how to publish plugins.
+          <Link href="/guide/core-concepts/publishing-plugins">Click here</Link> for a guide on how to publish plugins.
         </div>
       </div>
       <form

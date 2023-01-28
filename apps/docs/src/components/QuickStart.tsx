@@ -14,7 +14,7 @@ export const QuickStartArea = () => (
         name: 'Create a new project',
         description: 'Build a new Discord bot with Spark.',
       }}
-      href="/docs/getting-started/create-new"
+      href="/guide/getting-started/create-new"
     />
     <DetailedFeatureLink
       feature={{
@@ -22,7 +22,7 @@ export const QuickStartArea = () => (
         name: 'Add to your project',
         description: 'Add things to your bot with Spark.',
       }}
-      href="/docs/getting-started/add-to-project"
+      href="/guide/getting-started/add-to-project"
     />
   </div>
 );
@@ -35,7 +35,7 @@ export const FeatureArea = () => (
         name: 'Adding commands',
         description: 'Add new commands to your project.',
       }}
-      href="/docs/core-concepts/adding-commands"
+      href="/guide/core-concepts/adding-commands"
     />
     <DetailedFeatureLink
       feature={{
@@ -43,7 +43,7 @@ export const FeatureArea = () => (
         name: 'Adding events',
         description: 'Add new events to your project.',
       }}
-      href="/docs/core-concepts/adding-events"
+      href="/guide/core-concepts/adding-events"
     />
   </div>
 );
