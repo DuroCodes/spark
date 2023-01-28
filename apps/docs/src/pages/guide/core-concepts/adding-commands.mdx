@@ -31,7 +31,7 @@ Inside of the run function, you can use `interaction`, `client`, and `args`. (`a
 
 ### Publishing
 
-To publish your command, add the `Plugins.Publish()` plugin from `@spark.ts/handler`.
+To publish your command, add the `Plugins.Publish()` plugin from `@spark.ts/handler` into the `initPlugins` option.
 
 ```ts
 import { SparkCommand, CommandType, Plugins } from '@spark.ts/handler';
@@ -40,7 +40,7 @@ export default new SparkCommand({
   type: CommandType.Slash, // you can also use 'slash'
   name: 'ping', // if you don't input this, it'll use the file name (ex: foo.ts -> 'foo')
   description: 'replies with pong', // if you don't input this, it'll use '...'
-  plugins: [Plugins.Publish()],
+  initPlugins: [Plugins.Publish()],
   run({ interaction, client }) {
     client.logger.debug('pong');
     interaction.reply('pong');
