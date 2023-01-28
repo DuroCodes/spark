@@ -10,7 +10,7 @@
     "lint": "next lint",
     "vercel-build": "prisma generate && next build",
     "prisma:generate": "prisma generate",
-    "docgen": "rm -rf src/pages/docs && node src/utils/docgen.mjs && node src/utils/docgen.mjs"
+    "docgen": "rm -rf src/pages/docs/api && node src/utils/docgen.mjs && node src/utils/docgen.mjs"
   },
   "author": "DuroCodes",
   "license": "MIT",

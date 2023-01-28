@@ -12,6 +12,7 @@ interface PluginProps {
   name: string;
   id: string;
   author: Author;
+  createdAt: Date;
 }
 
 export function PluginCard({ plugin }: { plugin: PluginProps; }) {
@@ -29,7 +30,13 @@ export function PluginCard({ plugin }: { plugin: PluginProps; }) {
             objectFit="cover"
           />
         </div>
-        {plugin.author.name}
+        {plugin.author.name} • {
+          plugin.createdAt.toLocaleDateString('en-us', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })
+        }
       </div>
       <style jsx global>{`
       html.dark .icon-circle {
