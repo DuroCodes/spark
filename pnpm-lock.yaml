@@ -161,7 +161,7 @@ importers:
 
   packages/guards:
     specifiers:
-      '@spark.ts/handler': ^1.5.0
+      '@spark.ts/handler': workspace:^
       discord.js: ^14.7.1
       eslint: ^8.32.0
       eslint-config-airbnb-base: ^15.0.0
