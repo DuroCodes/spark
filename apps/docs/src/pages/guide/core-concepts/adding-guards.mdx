@@ -1,0 +1,72 @@
+---
+title: Adding Guards to Your Bot
+description: Add guards to your Spark bot
+---
+
+import { Tabs, Tab } from '~/components/Tabs';
+import Callout from '~/components/Callout';
+
+# Adding Guards
+
+The `@spark.ts/guards` package adds easy to use premade plugins. For example, one of the helpers allow you to specify that the command must be ran in a specific guild.
+
+## Installation
+
+<Tabs
+  items={['npm', 'yarn', 'pnpm']}
+  storageKey="selected-package-manager"
+>
+  <Tab>
+    ```
+    npm install @spark.ts/guards
+    ```
+  </Tab>
+  <Tab>
+    ```
+    yarn add @spark.ts/guards
+    ```
+  </Tab>
+  <Tab>
+    ```
+    pnpm add @spark.ts/guards
+    ```
+  </Tab>
+</Tabs>
+
+## Setup
+
+Here's a basic example of a guard that tests if the command is ran in the test guild.
+
+```ts filename="src/guards/inTestGuild.ts" copy
+import { Guard, Helpers } from '@spark.ts/guards';
+
+const TEST_GUILD_ID = '123123';
+
+export const inTestGuild = Guard({
+  condition: Helpers.InGuild([TEST_GUILD_ID]),
+  onFalse: 'This command can only be ran in the test guild!',
+});
+```
+
+You can view all of the helpers by using the intellisense in your IDE.
+
+## Usage
+
+<Callout type="info">
+  Guards work on any type of command
+</Callout>
+
+You can use this guard in your command by importing the guard file, and using that in the `plugins` option.
+
+```ts filename="src/commands/test.ts" copy {5}
+import { SparkCommand } from '@spark.ts/handler';
+import { inTestGuild } from '../../guards/inTestGuild.js';
+
+export default new SparkCommand({
+  plugins: [inTestGuild],
+  run({ interaction }) {
+    // This would only be executed if the guard passed
+    interaction.reply('👋');
+  },
+});
+```
