@@ -3,9 +3,10 @@ import { BaseEvent } from './baseEvent';
 import { Store } from '../util/store';
 import { TextCommand } from '../types/command';
 import { controller } from '../util/controller';
+import { Processed } from '../types/util';
 
 async function textCommandHandler(
-  command: TextCommand,
+  command: Processed<TextCommand>,
   message: Message,
   args: string[],
 ) {

@@ -78,13 +78,15 @@ function registerCommand(command: Processed<Command>, client: Client): Result<vo
         ...sharedProps,
       };
 
-      cmd.aliases?.forEach((a) => Store.TextCommands.aliases.set(a, textCmd as TextCommand));
+      cmd.aliases?.forEach(
+        (a) => Store.TextCommands.aliases.set(a, textCmd as Processed<TextCommand>),
+      );
 
-      Store.TextCommands.text.set(cmd.name, textCmd as TextCommand);
+      Store.TextCommands.text.set(cmd.name, textCmd as Processed<TextCommand>);
 
       Store.ApplicationCommands[
         ApplicationCommandType.ChatInput
-      ].set(cmd.name, slashCmd as SlashCommand);
+      ].set(cmd.name, slashCmd as Processed<SlashCommand>);
 
       client.logger.debug(`Registered both command: ${cmd.name}.`);
 
@@ -104,7 +106,11 @@ function intoDefinedCommand(
 }
 
 async function processPlugins(
-  { command, client, controller }: { command: Command; client: Client; controller: Controller; },
+  {
+    command,
+    client,
+    controller,
+  }: { command: Processed<Command>; client: Client; controller: Controller; },
 ) {
   if (command.initPlugins) {
     if (command.type === CommandType.Slash) {

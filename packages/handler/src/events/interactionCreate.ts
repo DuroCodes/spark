@@ -9,9 +9,10 @@ import { SlashCommand } from '../types/command';
 import { Store } from '../util/store';
 import { controller } from '../util/controller';
 import { BaseEvent } from './baseEvent';
+import { Processed } from '../types/util';
 
 async function slashCommandHandler(
-  command: SlashCommand,
+  command: Processed<SlashCommand>,
   interaction: ChatInputCommandInteraction,
 ) {
   try {

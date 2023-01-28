@@ -13,8 +13,20 @@ const rawCommandType = {
 type GuildId = `${number}`;
 
 export interface PublishOptions {
+  /**
+   * An array of guild ids for publication.
+   * @default []
+   */
   guildIds?: GuildId[];
+  /**
+   * Whether the command should be registered in DMs or not.
+   * @default false
+   */
   dmPermission?: boolean;
+  /**
+   * Member permissions to be able to use the command.
+   * @default null
+   */
   defaultMemberPermissions?: PermissionResolvable | null;
 }
 

@@ -1,6 +1,10 @@
 import { ApplicationCommandType, Collection } from 'discord.js';
 import { SlashCommand, TextCommand } from '../types/command';
+import { Processed } from '../types/util';
 
+/**
+ * `Store` stores all of the commands in an object so you can access them easily.
+ */
 export namespace Store {
   /**
    * The interaction commands.
@@ -8,7 +12,7 @@ export namespace Store {
   */
   // TODO: Add support for other command types. (Such as user commands)
   export const ApplicationCommands = {
-    [ApplicationCommandType.ChatInput]: new Collection<string, SlashCommand>(),
+    [ApplicationCommandType.ChatInput]: new Collection<string, Processed<SlashCommand>>(),
   };
 
   /**
@@ -16,7 +20,7 @@ export namespace Store {
    * Stores text commands and aliases for the handler.
    */
   export const TextCommands = {
-    text: new Collection<string, TextCommand>(),
-    aliases: new Collection<string, TextCommand>(),
+    text: new Collection<string, Processed<TextCommand>>(),
+    aliases: new Collection<string, Processed<TextCommand>>(),
   };
 }

@@ -11,23 +11,35 @@ import {
   SlashCommand,
   TextCommand,
 } from './command';
+import { Processed } from './util';
 
+/**
+ * Represents the controller object
+ */
 export interface Controller {
+  /**
+   * Continues plugin execution, runs the next plugin.
+   */
   next: () => Ok<void>;
+  /**
+   * Stops plugin execution, doesn't run the next plugin.
+   */
   stop: () => Err<void>;
 }
 
+/**
+ * Base plugin type
+ */
 export interface BasePlugin {
   name?: string;
   description?: string;
-  preprocess?: boolean;
   run: () => Awaitable<Result<void, void>>;
 }
 
 interface CommandPluginOptionsDefs {
   [CommandType.Both]: {
     client: Client;
-    command: Command;
+    command: Processed<Command>;
     controller: Controller;
     message?: Message;
     interaction?: ChatInputCommandInteraction;
@@ -36,14 +48,14 @@ interface CommandPluginOptionsDefs {
   [CommandType.Slash]: {
     client: Client;
     controller: Controller;
-    command: SlashCommand;
+    command: Processed<SlashCommand>;
     interaction: ChatInputCommandInteraction;
   };
 
   [CommandType.Text]: {
     client: Client;
     controller: Controller;
-    command: TextCommand;
+    command: Processed<TextCommand>;
     message: Message;
   };
 }
@@ -52,28 +64,36 @@ interface InitPluginOptionsDefs {
   [CommandType.Both]: {
     client: Client;
     controller: Controller;
-    command: Command;
+    command: Processed<Command>;
   };
 
   [CommandType.Slash]: {
     client: Client;
     controller: Controller;
-    command: SlashCommand;
+    command: Processed<SlashCommand>;
   };
 
   [CommandType.Text]: {
     client: Client;
     controller: Controller;
-    command: TextCommand;
+    command: Processed<TextCommand>;
   };
 }
 
+/**
+ * Represents a plugin that is ran upon the command being used.
+ * Good for guards, reusability.
+ */
 export interface CommandPlugin<T extends CommandType> {
   name?: string;
   description?: string;
   run: (options: CommandPluginOptionsDefs[T]) => Awaitable<Result<void, void>>;
 }
 
+/**
+ * Represents a plugin that is ran upon the command being loaded.
+ * Good for pre-processing, or doing something with the data of the command.
+ */
 export interface InitPlugin<T extends CommandType> {
   name?: string;
   description?: string;
