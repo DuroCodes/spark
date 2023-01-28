@@ -2,18 +2,18 @@ import { CommandPlugin, CommandType, Command } from '@spark.ts/handler';
 import { ChatInputCommandInteraction, Message } from 'discord.js';
 
 type RemoveMethods<T> = T extends {} ? {
-    [P in keyof T as T[P] extends (...args: any[]) => unknown ? never : P]: RemoveMethods<T[P]>;
+  [P in keyof T as T[P] extends (...args: any[]) => unknown ? never : P]: RemoveMethods<T[P]>;
 } : T;
 
 type ConditionalMethod = (args: {
-    command: Command,
-    interaction: RemoveMethods<ChatInputCommandInteraction>,
-    message: RemoveMethods<Message>;
+  command: Command,
+  interaction: RemoveMethods<ChatInputCommandInteraction>,
+  message: RemoveMethods<Message>;
 }) => unknown;
 
 interface Conditional {
-    condition: ConditionalMethod | unknown;
-    onFalse?: string;
+  condition: ConditionalMethod | unknown;
+  onFalse?: string;
 }
 
 export function Guard(...conditionals: Conditional[]): CommandPlugin<CommandType.Both> {
