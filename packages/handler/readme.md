@@ -1,6 +1,6 @@
 # Spark Handler
 
-> A Discord.js Handler built on [TypeScript](https://typescriptlang.org) <img src="https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png" width="15">
+> A Discord.js Handler built on [TypeScript](https://typescriptlang.org) <img src="https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png" width="15"/>
 
 ## **Installation**
 

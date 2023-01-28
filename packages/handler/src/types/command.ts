@@ -69,7 +69,7 @@ export interface SlashCommand extends BaseCommand {
   /**
    * Plugins that will be ran upon the command being initialized/loaded.
    */
-  initPlugins?: (InitPlugin<CommandType.Slash> | CommandPlugin<CommandType.Both>)[];
+  initPlugins?: (InitPlugin<CommandType.Slash> | InitPlugin<CommandType.Both>)[];
   run: (options: CommandOptionsDefs[CommandType.Slash]) => unknown;
 }
 
