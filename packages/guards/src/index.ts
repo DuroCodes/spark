@@ -1,21 +1,43 @@
 import { CommandPlugin, CommandType, Command } from '@spark.ts/handler';
 import { ChatInputCommandInteraction, Message } from 'discord.js';
 
-type RemoveMethods<T> = T extends {} ? {
-  [P in keyof T as T[P] extends (...args: any[]) => unknown ? never : P]: RemoveMethods<T[P]>;
+type Immutable<T> = T extends {} ? {
+  readonly [P in keyof T as T[P] extends (...args: any[]) => unknown ? never : P]: Immutable<T[P]>;
 } : T;
 
-type ConditionalMethod = (args: {
+export type Helper = (args: {
   command: Command,
-  interaction: RemoveMethods<ChatInputCommandInteraction>,
-  message: RemoveMethods<Message>;
+  interaction: Immutable<ChatInputCommandInteraction>,
+  message: Immutable<Message>;
 }) => unknown;
 
 interface Conditional {
-  condition: ConditionalMethod | unknown;
+  /**
+   * The condition or helper to check.
+   */
+  condition: Helper | unknown;
+
+  /**
+   * How to reply to the user if the condition fails.
+   */
   onFalse?: string;
 }
 
+/**
+ * Accepts a number of conditions to check before running a command.
+ * @param conditionals All of conditions to check
+ * @example
+ * export default new SparkCommand({
+ *  description: "...",
+ *  plugins: [
+ *    Guard(
+ *      {
+ *        condition: Helpers.Not(Helpers.IsBot())
+ *      }
+ *    )
+ *  ]
+ * });
+ */
 export function Guard(...conditionals: Conditional[]): CommandPlugin<CommandType.Both> {
   return {
     name: 'guard',
@@ -43,12 +65,81 @@ export function Guard(...conditionals: Conditional[]): CommandPlugin<CommandType
   };
 }
 
-export abstract class Helpers {
-  static InGuild(guilds: string[]): ConditionalMethod {
+export const Helpers = {
+  /**
+   * Checks if the id of the server the command is used in is in a provided list of guild ids.
+   * @param guilds Provided list of guild ids.
+   */
+  InGuild(guilds: string[]): Helper {
     return ({ command, message, interaction }) => guilds.includes((command.type === 'slash' ? interaction : message).guildId!);
-  }
+  },
 
-  static InChannel(channels: string[]): ConditionalMethod {
+  /**
+   * Checks if the id of the channel the command is used in is in a provided list of channel ids.
+   * @param channels Provided list of channel ids.
+   */
+  InChannel(channels: string[]): Helper {
     return ({ command, message, interaction }) => channels.includes((command.type === 'slash' ? interaction : message).channelId!);
+  },
+
+  /**
+   * Checks if the id of the user who used the command is in a provided list of user ids.
+   * @param users Provided list of user ids.
+   */
+  ByUser(users: string[]): Helper {
+    return ({ command, message, interaction }) => users.includes((command.type === "slash" ? interaction : message).member?.user.id!);
+  },
+
+  /**
+   * Checks if the user who used the command is a discord bot or not.
+   */
+  IsBot(): Helper {
+    return ({ command, message, interaction }) => (command.type === "slash" ? interaction : message).member?.user.bot!;
+  },
+
+  /**
+   * Checks if the command was used in a discord server or not.
+   */
+  InServer(): Helper {
+    return ({ command, message, interaction }) => (command.type === "slash" ? interaction : message).guild !== null;
+  },
+
+  /**
+   * Accepts a helper function and returns true if the condition doesn't pass. Mimics `!` operator.
+   * @param condition Helper function to test.
+   * @example
+   * export default new SparkCommand({
+   *  description: "...",
+   *  plugins: [
+   *    Guard(
+   *      {
+   *        condition: Helpers.Not(Helpers.IsBot()) // don't use `!Helpers.IsBot()`
+   *      }
+   *    )
+   *  ]
+   * });
+   */
+  Not(condition: Helper): Helper {
+    return (o) => !condition(o);
+  },
+
+  /**
+   * Accepts 2 helper functions and if one turns out to be true then the condition passes. Mimics `||` operator.
+   * @param x First helper function to test.
+   * @param y Second helper function to test.
+   * @example
+   * export default new SparkCommand({
+   *  description: "...",
+   *  plugins: [
+   *    Guard(
+   *      {
+   *        condition: Helpers.Or(Helpers.IsBot(),Helpers.InServer())
+   *      }
+   *    )
+   *  ]
+   * });
+   */
+  Or(x: Helper,y: Helper): Helper {
+    return (o) => x(o) || y(o);
   }
 }
