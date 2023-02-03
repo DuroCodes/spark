@@ -87,25 +87,26 @@ export const Helpers = {
    * @param users Provided list of user ids.
    */
   ByUser(users: string[]): Helper {
-    return ({ command, message, interaction }) => users.includes((command.type === "slash" ? interaction : message).member?.user.id!);
+    return ({ command, message, interaction }) => users.includes((command.type === 'slash' ? interaction : message).member?.user.id!);
   },
 
   /**
    * Checks if the user who used the command is a discord bot or not.
    */
   IsBot(): Helper {
-    return ({ command, message, interaction }) => (command.type === "slash" ? interaction : message).member?.user.bot!;
+    return ({ command, message, interaction }) => (command.type === 'slash' ? interaction : message).member?.user.bot!;
   },
 
   /**
    * Checks if the command was used in a discord server or not.
    */
   InServer(): Helper {
-    return ({ command, message, interaction }) => (command.type === "slash" ? interaction : message).guild !== null;
+    return ({ command, message, interaction }) => (command.type === 'slash' ? interaction : message).guild !== null;
   },
 
   /**
-   * Accepts a helper function and returns true if the condition doesn't pass. Mimics `!` operator.
+   * Accepts a helper function and returns true if the condition doesn't pass.
+   * Mimics `!` operator.
    * @param condition Helper function to test.
    * @example
    * export default new SparkCommand({
@@ -124,7 +125,8 @@ export const Helpers = {
   },
 
   /**
-   * Accepts 2 helper functions and if one turns out to be true then the condition passes. Mimics `||` operator.
+   * Accepts 2 helper functions and if one turns out to be true then the condition passes.
+   * Mimics `||` operator.
    * @param x First helper function to test.
    * @param y Second helper function to test.
    * @example
@@ -139,7 +141,7 @@ export const Helpers = {
    *  ]
    * });
    */
-  Or(x: Helper,y: Helper): Helper {
+  Or(x: Helper, y: Helper): Helper {
     return (o) => x(o) || y(o);
-  }
-}
+  },
+};
