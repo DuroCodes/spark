@@ -1,14 +1,22 @@
 import { CommandPlugin, CommandType, Command } from '@spark.ts/handler';
-import { ChatInputCommandInteraction, Message } from 'discord.js';
+import { Interaction, InteractionType, Message, MessageReplyOptions, InteractionReplyOptions, MessagePayload, Collection } from 'discord.js';
+import type { ReadonlyCollection } from "@discordjs/collection";
 
-type Immutable<T> = T extends {} ? {
-  readonly [P in keyof T as T[P] extends (...args: any[]) => unknown ? never : P]: Immutable<T[P]>;
-} : T;
+type Immutable<T> = T extends Map<infer K,infer V>
+  ? ReadonlyMap<K,Immutable<V>>
+  : T extends Array<infer U>
+    ? ReadonlyArray<Immutable<U>>
+    : T extends Collection<infer K,infer V>
+      ? ReadonlyCollection<K,Immutable<V>>
+      : T extends object ? {
+        readonly [P in keyof T as T[P] extends (...args: any[]) => unknown ? never : P]: Immutable<T[P]>;
+      } : T;
 
 export type Helper = (args: {
   command: Command,
-  interaction: Immutable<ChatInputCommandInteraction>,
+  interaction: Immutable<Interaction>,
   message: Immutable<Message>;
+  like: Immutable<Interaction | Message>;
 }) => unknown;
 
 interface Conditional {
@@ -20,7 +28,12 @@ interface Conditional {
   /**
    * How to reply to the user if the condition fails.
    */
-  onFalse?: string;
+  onFalse?: string | (<Slash extends boolean>(isSlash: Slash) => (Slash extends true ? InteractionReplyOptions : MessageReplyOptions | MessagePayload) | string);
+
+  /**
+   * If `onFalse` is specified and the command is an interaction than it makes the response ephemeral automatically. Overrides `onFalse` ephemeral.
+   */
+  ephemeral?: boolean;
 }
 
 /**
@@ -48,20 +61,33 @@ export function Guard(...conditionals: Conditional[]): CommandPlugin<CommandType
       for (const conditional of conditionals) {
         let { condition } = conditional;
         if (typeof conditional.condition === 'function') {
-          condition = conditional.condition({ command, message, interaction });
+          condition = conditional.condition({ command, message, interaction, like: {...message, ...interaction} });
         }
 
         if (!condition) {
           if ('onFalse' in conditional) {
-            if (command.type === CommandType.Slash) interaction?.reply(conditional.onFalse!);
-            else if (command.type === CommandType.Text) message?.reply(conditional.onFalse!);
+            if(typeof conditional.onFalse === "string")
+              (command.type === CommandType.Slash ? interaction : message)?.reply(conditional.onFalse);
+            else if (command.type === CommandType.Slash){
+              const result = conditional.onFalse<true>(true);
+
+              if(typeof result === "string"){
+                interaction?.reply({
+                  content: result,
+                  ephemeral: conditional.ephemeral ? true : false
+                });
+              } else interaction?.reply({
+                ...result,
+                ephemeral: conditional.ephemeral ? true : false
+              });
+            } else if (command.type === CommandType.Text) message?.reply(conditional.onFalse<false>(false));
           }
           return controller.stop();
         }
       }
 
       return controller.next();
-    },
+    }
   };
 }
 
@@ -71,7 +97,7 @@ export const Helpers = {
    * @param guilds Provided list of guild ids.
    */
   InGuild(guilds: string[]): Helper {
-    return ({ command, message, interaction }) => guilds.includes((command.type === 'slash' ? interaction : message).guildId!);
+    return ({ like }) => guilds.includes(like.guildId!);
   },
 
   /**
@@ -79,7 +105,7 @@ export const Helpers = {
    * @param channels Provided list of channel ids.
    */
   InChannel(channels: string[]): Helper {
-    return ({ command, message, interaction }) => channels.includes((command.type === 'slash' ? interaction : message).channelId!);
+    return ({ like }) => channels.includes(like.guildId!);
   },
 
   /**
@@ -87,21 +113,45 @@ export const Helpers = {
    * @param users Provided list of user ids.
    */
   ByUser(users: string[]): Helper {
-    return ({ command, message, interaction }) => users.includes((command.type === "slash" ? interaction : message).member?.user.id!);
+    return ({ like }) => users.includes(like.member?.user.id!);
   },
 
   /**
    * Checks if the user who used the command is a discord bot or not.
    */
   IsBot(): Helper {
-    return ({ command, message, interaction }) => (command.type === "slash" ? interaction : message).member?.user.bot!;
+    return ({ like }) => like.member?.user.bot!;
   },
 
   /**
    * Checks if the command was used in a discord server or not.
    */
   InServer(): Helper {
-    return ({ command, message, interaction }) => (command.type === "slash" ? interaction : message).guild !== null;
+    return ({ like }) => like.guild !== null;
+  },
+
+  /**
+   * Checks if the command is an application command or not.
+   */
+  IsApplicationCommand(): Helper {
+    return ({ command }) => command.type === CommandType.Slash;
+  },
+
+  /**
+   * Checks the type of the interaction.
+   * @deprecated This helper is an implementation for a future version of `@sparkts/handler`
+   * @param type The type of interaction to check for. Is converted to {@link InteractionType}.
+   */
+  InteractionIsTypeOf(type: "ping" | "slash" | "component" | "autocomplete" | "modal"): Helper {
+    const conversions = {
+      ping: 1,
+      slash: 2,
+      component: 3,
+      autocomplete: 4,
+      modal: 5
+    }
+
+    return ({ interaction }) => interaction.type === conversions[type];
   },
 
   /**
@@ -133,13 +183,33 @@ export const Helpers = {
    *  plugins: [
    *    Guard(
    *      {
-   *        condition: Helpers.Or(Helpers.IsBot(),Helpers.InServer())
+   *        condition: Helpers.Or(Helpers.IsBot(),Helpers.InServer()) // dont use `Helpers.IsBot() || Helpers.InServer()`
    *      }
    *    )
    *  ]
    * });
    */
-  Or(x: Helper,y: Helper): Helper {
-    return (o) => x(o) || y(o);
+  Or(helper: Helper,val: Helper | unknown): Helper {
+    return (o) => helper(o) || (typeof val === "function" ? val(o) : val);
+  },
+
+  /**
+   * Accepts a helper function and another argument that can also be a helper or any other type and compares them.
+   * @param helper Helper function to compare.
+   * @param val Either a value or a helper function.
+   * @example
+   * export default new SparkCommand({
+   *  description: "...",
+   *  plugins: [
+   *    Guard(
+   *      {
+   *        condition: Helpers.EqualTo(Helpers.IsBot(),Helpers.InServer())
+   *      }
+   *    )
+   *  ]
+   * });
+   */
+  EqualTo(helper: Helper,val: Helper | unknown): Helper {
+    return (o) => helper(o) === (typeof val === "function" ? val(o) : val);
   }
 }
