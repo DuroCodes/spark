@@ -1,5 +1,5 @@
 import { CommandPlugin, CommandType, Command } from '@spark.ts/handler';
-import { Interaction, InteractionType, Message, MessageReplyOptions, InteractionReplyOptions, MessagePayload, Collection } from 'discord.js';
+import { Interaction, Message, MessageReplyOptions, InteractionReplyOptions, MessagePayload, Collection } from 'discord.js';
 import type { ReadonlyCollection } from "@discordjs/collection";
 
 type Immutable<T> = T extends Map<infer K,infer V>
@@ -140,7 +140,7 @@ export const Helpers = {
   /**
    * Checks the type of the interaction.
    * @deprecated This helper is an implementation for a future version of `@sparkts/handler`
-   * @param type The type of interaction to check for. Is converted to {@link InteractionType}.
+   * @param type The type of interaction to check for. Is converted to InteractionType.
    */
   InteractionIsTypeOf(type: "ping" | "slash" | "component" | "autocomplete" | "modal"): Helper {
     const conversions = {
