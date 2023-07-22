@@ -1,5 +1,11 @@
 # @spark.ts/handler
 
+## 1.6.4
+
+### Patch Changes
+
+- d454a7b: fix options field for commands
+
 ## 1.6.1
 
 ### Patch Changes

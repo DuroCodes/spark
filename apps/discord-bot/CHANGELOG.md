@@ -1,5 +1,12 @@
 # spark-bot
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [d454a7b]
+  - @spark.ts/handler@1.6.4
+
 ## 1.0.2
 
 ### Patch Changes
