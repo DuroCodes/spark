@@ -61,7 +61,7 @@ export interface TextCommand extends BaseCommand {
 
 export interface SlashCommand extends BaseCommand {
   type: CommandType.Slash;
-  options?: ApplicationCommandOptionData;
+  options?: ApplicationCommandOptionData[];
   /**
    * Plugins that will be ran upon the command being used.
    */
@@ -80,7 +80,7 @@ export interface SlashCommand extends BaseCommand {
  */
 export interface BothCommand extends BaseCommand {
   type: CommandType.Both;
-  options?: ApplicationCommandOptionData;
+  options?: ApplicationCommandOptionData[];
   /**
    * Aliases for the command.
    * The command will be ran if any of these aliases are used with the prefix.
