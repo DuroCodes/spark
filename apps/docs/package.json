@@ -19,7 +19,7 @@
     "@hookform/resolvers": "^2.9.10",
     "@leafac/rehype-shiki": "^2.2.1",
     "@prisma/client": "^4.7.1",
-    "@react-aria/ssr": "3.3.0",
+    "@react-aria/ssr": "3.9.2",
     "@tanstack/react-query": "^4.20.4",
     "@trpc/client": "^10.6.0",
     "@trpc/next": "^10.6.0",
